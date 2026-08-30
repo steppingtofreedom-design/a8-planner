@@ -151,6 +151,11 @@
   .mbody{display:none;padding-top:12px;}
   .moment.open .mbody{display:block;}
   .mbody .card:last-child{margin-bottom:0;}
+  .msec{margin-bottom:12px;}
+  .msec.open .mchev{transform:rotate(90deg);}
+  .msec .mbody{display:none;padding-top:12px;}
+  .msec.open .mbody{display:block;}
+  .msec .mbody .card:last-child{margin-bottom:0;}
   #gate{position:fixed;inset:0;z-index:99999;background:var(--sky);display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden;}
   #gate:before{content:"";position:absolute;width:70vw;height:70vw;max-width:460px;max-height:460px;border-radius:50%;background:var(--lav);opacity:.55;top:-16vw;right:-18vw;}
   #gate:after{content:"";position:absolute;width:52vw;height:52vw;max-width:340px;max-height:340px;border-radius:50%;background:var(--sky-soft);opacity:.7;bottom:-14vw;left:-14vw;}
@@ -479,6 +484,7 @@
 
   <!-- ============ WEEK ============ -->
   <section id="week" class="view">
+    <div class="msec"><button class="mhead"><span class="mchev">▸</span><span class="mlab">🧠 Sunday brain dump</span><span class="msub">weekly reset</span></button><div class="mbody">
     <div class="card" id="bdCard" style="border-left:4px solid var(--brass);">
       <div class="between"><span class="eyebrow">🧠 Sunday brain dump &amp; weekly reset</span><span class="muted" id="bdWk" style="font-size:11px;"></span></div>
       <p class="muted" style="margin:6px 0 6px;font-size:12px;">Empty your head here every Sunday — every task, worry, idea, errand. Then pull the 3 biggest into your Weekly Big 3 below, and let the rest wait. This saves per week.</p>
@@ -491,6 +497,7 @@
         4 · Protect Shabbat, prayer, family, and workouts first — plan around them.
       </div>
     </div>
+    </div></div>
     <div class="card">
       <div class="eyebrow">Weekly Big 3 · this week</div>
       <div class="b3"><ul id="wBig3" style="margin-top:6px;"></ul></div>
@@ -567,6 +574,27 @@
     <div class="card" id="logoutTop" style="border-left:4px solid var(--signal);">
       <div class="between"><span class="eyebrow">Account</span><button class="btn ghost small" id="logoutBtn2" style="width:auto;">↪ Log out</button></div>
     </div>
+    <div class="card" id="syncCard" style="border:1.5px solid var(--pine);background:var(--paper);">
+      <div class="between"><span class="eyebrow" style="color:var(--pine);">☁️ Cloud sync · phone + laptop</span><span id="syncDot" style="font-size:11px;font-weight:700;color:var(--muted);">● offline</span></div>
+      <div id="syncOut" style="margin-top:9px;">
+        <p class="muted" style="font-size:12px;">Sign in once on each device and everything you log syncs automatically and is backed up in the cloud. Works alongside on-device saving — no internet needed to keep using the app.</p>
+        <input id="syEmail" type="email" autocomplete="username" placeholder="you@email.com" style="width:100%;border:1px solid var(--rule);border-radius:9px;padding:10px;font-size:15px;font-family:inherit;margin-top:9px;">
+        <input id="syPass" type="password" autocomplete="current-password" placeholder="Password (at least 6 characters)" style="width:100%;border:1px solid var(--rule);border-radius:9px;padding:10px;font-size:15px;font-family:inherit;margin-top:8px;">
+        <div class="row" style="gap:8px;margin-top:10px;">
+          <button id="syIn" class="btn" style="flex:1;">Sign in</button>
+          <button id="syUp" class="btn ghost" style="flex:1;">Create account</button>
+        </div>
+        <div id="syMsg" class="muted" style="font-size:11.5px;margin-top:8px;min-height:15px;"></div>
+      </div>
+      <div id="syncIn" style="display:none;margin-top:9px;">
+        <p style="font-size:13px;color:var(--pine);">Signed in as <b id="syWho"></b></p>
+        <div id="syStatus" class="muted" style="font-size:11.5px;margin-top:4px;">Synced ✓</div>
+        <div class="row" style="gap:8px;margin-top:11px;">
+          <button id="syPush" class="btn ghost small" style="flex:1;">Sync now ↻</button>
+          <button id="syOut" class="btn ghost small" style="flex:1;">Sign out</button>
+        </div>
+      </div>
+    </div>
     <div class="card" id="fontCard">
       <div class="eyebrow">Text size</div>
       <p class="muted" style="font-size:12.5px;margin:6px 0 9px;">Make everything bigger — easy to read at the gym without your glasses. You can also tap the <b>A⁺</b> button at the top of any screen.</p>
@@ -576,7 +604,8 @@
         <button class="btn ghost small" data-fs="2" style="flex:1;">X-Large</button>
       </div>
     </div>
-    <div id="system">
+
+    <div class="msec"><button class="mhead"><span class="mchev">▸</span><span class="mlab">📖 Your method</span><span class="msub">Pure Signal Card</span></button><div class="mbody">    <div id="system">
     <style>
       #system .wm{position:relative;}
       #system .sblock{border-top:1px solid var(--rule);padding-top:12px;margin-top:12px;}
@@ -675,40 +704,24 @@
       <div class="ipfoot">The 1·2·3 System © Jeff Heilman — used with permission. Private. Not for distribution.</div>
     </div>
   </div>
-    <div class="card">
+</div></div>
+
+    <div class="msec"><button class="mhead"><span class="mchev">▸</span><span class="mlab">✝️ Scripture memory</span><span class="msub">Q1 verses</span></button><div class="mbody">    <div class="card">
       <h2>📖 Scripture memory · Q1</h2>
       <p class="muted" style="font-size:12px;">The daily card on your Today screen drills one at a time. Method: each day read today's focus aloud <b>10×</b> and try to recite it; review what's marked solid; add one Psalm 144 verse at a time and recite the whole psalm daily. Aim: all 7 verses + Psalm 144 solid this quarter.</p>
       <div id="scripAll" style="margin-top:10px;"></div>
       <div class="muted" style="font-size:9.5px;margin-top:12px;border-top:1px solid var(--rule);padding-top:8px;">Scripture quotations taken from the Amplified® Bible (AMP), Copyright © 2015 by The Lockman Foundation. Used by permission. For personal memorization.</div>
     </div>
-    <div class="card" style="border-left:4px solid var(--brass);">
+</div></div>
+
+    <div class="msec"><button class="mhead"><span class="mchev">▸</span><span class="mlab">⏳ Time Systems</span><span class="msub">the playbook</span></button><div class="mbody">    <div class="card" style="border-left:4px solid var(--brass);">
       <h3>⏳ Time Systems Playbook</h3>
       <p class="muted" style="font-size:12px;">Your 15 installable time systems, from your own mentors. A wisdom bite appears on your Today screen daily. Open the full playbook to read, share, or print:</p>
       <a href="https://claude.ai/code/artifact/44bc4ab2-d292-4932-8d9a-e3397512afde" target="_blank" rel="noopener" class="btn" style="margin-top:8px;text-decoration:none;display:block;">Open the Time Systems Playbook ↗</a>
     </div>
-    <div class="card" id="syncCard" style="border:1.5px solid var(--pine);background:var(--paper);">
-      <div class="between"><span class="eyebrow" style="color:var(--pine);">☁️ Cloud sync · phone + laptop</span><span id="syncDot" style="font-size:11px;font-weight:700;color:var(--muted);">● offline</span></div>
-      <div id="syncOut" style="margin-top:9px;">
-        <p class="muted" style="font-size:12px;">Sign in once on each device and everything you log syncs automatically and is backed up in the cloud. Works alongside on-device saving — no internet needed to keep using the app.</p>
-        <input id="syEmail" type="email" autocomplete="username" placeholder="you@email.com" style="width:100%;border:1px solid var(--rule);border-radius:9px;padding:10px;font-size:15px;font-family:inherit;margin-top:9px;">
-        <input id="syPass" type="password" autocomplete="current-password" placeholder="Password (at least 6 characters)" style="width:100%;border:1px solid var(--rule);border-radius:9px;padding:10px;font-size:15px;font-family:inherit;margin-top:8px;">
-        <div class="row" style="gap:8px;margin-top:10px;">
-          <button id="syIn" class="btn" style="flex:1;">Sign in</button>
-          <button id="syUp" class="btn ghost" style="flex:1;">Create account</button>
-        </div>
-        <div id="syMsg" class="muted" style="font-size:11.5px;margin-top:8px;min-height:15px;"></div>
-      </div>
-      <div id="syncIn" style="display:none;margin-top:9px;">
-        <p style="font-size:13px;color:var(--pine);">Signed in as <b id="syWho"></b></p>
-        <div id="syStatus" class="muted" style="font-size:11.5px;margin-top:4px;">Synced ✓</div>
-        <div class="row" style="gap:8px;margin-top:11px;">
-          <button id="syPush" class="btn ghost small" style="flex:1;">Sync now ↻</button>
-          <button id="syOut" class="btn ghost small" style="flex:1;">Sign out</button>
-        </div>
-      </div>
-    </div>
-    <div class="card" id="logoutCard"><button class="btn ghost" id="logoutBtn" style="border-color:var(--rule);">↪ Log out</button></div>
-    <div class="card" style="border:1.5px solid var(--brass);">
+</div></div>
+
+    <div class="msec"><button class="mhead"><span class="mchev">▸</span><span class="mlab">💾 Backup, install & reset</span><span class="msub">data tools</span></button><div class="mbody">    <div class="card" style="border:1.5px solid var(--brass);">
       <h2>📋 Back up your data (works on iPhone)</h2>
       <p class="muted" style="font-size:12px;">iOS can wipe the app's on-device storage when you fully close it. To be safe, tap <b>Show my data</b>, press-and-hold the text → <b>Select All → Copy</b>, and paste it into your <b>Notes</b> app. To restore later, paste it back below and tap <b>Restore</b>.</p>
       <button class="btn" id="showBackup" style="margin-top:10px;">Show my data to copy</button>
@@ -731,11 +744,12 @@
       <p class="muted"><b>iPhone:</b> open in Safari → Share → <em>Add to Home Screen</em>.<br><b>Android:</b> open in Chrome → menu (⋮) → <em>Add to Home screen</em>.<br>It then opens full-screen like an app.</p>
     </div>
     <div class="card">
+      <button class="btn ghost" id="resetBtn" style="border-color:var(--flag);color:var(--flag);">Reset all data on this device</button>
+    </div>
+</div></div>
+    <div class="card">
       <h3>A word for today</h3>
       <p class="verse">"If any of you lacks wisdom, let him ask God, who gives generously to all." — James 1:5</p>
-    </div>
-    <div class="card">
-      <button class="btn ghost" id="resetBtn" style="border-color:var(--flag);color:var(--flag);">Reset all data on this device</button>
     </div>
     <div style="text-align:center;font-size:10px;color:var(--muted);margin-top:2px;">A8 Planner · cloud sync + moments UX · Aug 30</div>
   </section>
@@ -1965,8 +1979,8 @@ window.addEventListener("focus",function(){if(sb&&sbUser)pullRemote(true);});
 document.getElementById("goalEditBtn").onclick=function(){var ed=document.getElementById("goalEdit");var open=ed.style.display!=="none";ed.style.display=open?"none":"block";if(!open){document.getElementById("goalTitleIn").value=(DB.meta&&DB.meta.goalTitle)||"";document.getElementById("goalTgtIn").value=(DB.meta&&DB.meta.goalTarget)||"";}};
 document.getElementById("goalSave").onclick=saveGoalEdit;
 document.querySelectorAll('[data-info]').forEach(function(b){b.onclick=function(){var el=document.getElementById(b.getAttribute("data-info"));if(el)el.style.display=(el.style.display==="none"||!el.style.display)?"block":"none";};});
-document.getElementById("logoutBtn").onclick=doSignOut;
 document.getElementById("logoutBtn2").onclick=doSignOut;
+document.querySelectorAll('.msec .mhead').forEach(function(h){h.onclick=function(){h.parentElement.classList.toggle("open");};});
 document.getElementById("fontBtn").onclick=fsCycle;
 document.querySelectorAll('[data-fs]').forEach(function(b){b.onclick=function(){fsSet(+b.getAttribute("data-fs"));};});
 fsApply();
