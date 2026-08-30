@@ -1962,7 +1962,16 @@ function doSignUp(){if(!sb){syMsg("Sync unavailable right now — check your con
    if(r.error){syMsg(r.error.message,"var(--flag)");}
    else if(r.data&&r.data.session){syMsg("Account created ✓");document.getElementById("syPass").value="";pushRemote();}
    else{syMsg("Account created — check your email to confirm, then Sign in.","var(--pine)");}});}
-function doSignOut(){if(sb)sb.auth.signOut().then(function(){onSignedOut();});}
+function doSignOut(){
+ if(!sb){onSignedOut();return;}
+ try{flushSave();}catch(e){}
+ syncSetDot("syncing");syncStatusMsg("Saving to the cloud before sign-out…");
+ var done=function(){sb.auth.signOut().then(function(){onSignedOut();});};
+ if(sbUser){clearTimeout(_pushT);
+   var payload={user_id:sbUser.id,data:DB,updated_at:new Date().toISOString()};
+   sb.from("app_state").upsert(payload,{onConflict:"user_id"}).then(done,done);
+ }else{done();}
+}
 
 /* ---------------- INIT ---------------- */
 load();normalizeDB();try{var _of=localStorage.getItem("a8_owner");IS_OWNER=(_of===null?true:_of==="1");}catch(e){}if(IS_OWNER)applySeeds();bindKpi();resolveToday();renderAll();initMoments();_booted=true;initSync();
