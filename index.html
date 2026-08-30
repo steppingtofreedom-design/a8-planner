@@ -113,6 +113,8 @@
   .spark .bar span{position:absolute;bottom:-16px;left:0;right:0;text-align:center;font-size:9px;color:var(--muted);}
   .btn{display:inline-block;border:1.5px solid var(--signal);background:var(--signal);color:#fff;border-radius:10px;padding:11px 14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;text-align:center;width:100%;}
   .btn.ghost{background:#fff;color:var(--signal);border-color:var(--rule);}
+  .btn.ghost.on{background:var(--signal);color:#fff;border-color:var(--signal);}
+  .infobtn{background:transparent;border:0;color:var(--signal);font-family:var(--font-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;cursor:pointer;padding:8px 0 0;display:inline-block;}
   .btn.small{width:auto;padding:8px 12px;font-size:13px;}
 
   /* tab bar */
@@ -166,7 +168,7 @@
   #gate .gpwrap #gPass{margin-bottom:0;padding-right:66px;}
   #gate .gshow{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:transparent;border:0;color:var(--signal);font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.04em;cursor:pointer;padding:8px;}
   #gate .glink{background:transparent;color:var(--pine-soft);border:0;font-size:13px;text-decoration:underline;padding:11px;margin-top:2px;font-family:inherit;}
-  #capFab{position:fixed;right:16px;bottom:calc(104px + env(safe-area-inset-bottom));width:52px;height:52px;border-radius:50%;background:var(--brass);color:#fff;border:0;font-size:30px;line-height:1;box-shadow:0 3px 12px rgba(0,0,0,.22);z-index:35;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 3px;}
+  #capFab{position:fixed;right:14px;bottom:calc(120px + env(safe-area-inset-bottom));width:44px;height:44px;border-radius:50%;background:var(--signal);color:#fff;border:0;font-size:25px;opacity:.94;line-height:1;box-shadow:0 3px 12px rgba(0,0,0,.22);z-index:35;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 3px;}
   #capFab:active{background:var(--pine);}
   #capCard{border-left:4px solid var(--brass);}
   .capitem{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--rule);}
@@ -233,6 +235,32 @@
   .pmini .pgrid td .lt{padding:0 3px;}
   .pymonth{border-top:1px solid #D4DCEA;padding:6px 0;font-size:10.5px;}
   .pymonth b{color:#10243F;}
+  .dsheet{font-family:var(--font-sans);color:var(--graphite);max-width:7.4in;margin:0 auto;}
+  .dsheet .dhead{display:flex;align-items:center;gap:12px;border-bottom:2px solid var(--navy);padding-bottom:11px;margin-bottom:13px;}
+  .dsheet .deyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--iris);font-weight:700;}
+  .dsheet .ddate{font-family:var(--font-serif);font-size:25px;color:var(--graphite);line-height:1.05;margin:2px 0;}
+  .dsheet .dbadge{font-family:var(--font-mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--signal);}
+  .dsheet .dcols{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .dsheet .dsec{margin-bottom:13px;}
+  .dsheet .dlab{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--signal);font-weight:700;margin-bottom:6px;border-bottom:1px solid var(--rule);padding-bottom:3px;}
+  .dsheet .goalbox{border:1.5px solid var(--sky);border-radius:10px;padding:10px 12px;background:var(--sky-soft);}
+  .dsheet .goalbox .gt{font-family:var(--font-serif);font-size:14px;line-height:1.25;}
+  .dsheet .gbar{height:8px;border-radius:5px;background:#fff;border:1px solid var(--sky);margin:8px 0 4px;overflow:hidden;}
+  .dsheet .gbar span{display:block;height:100%;background:var(--signal);}
+  .dsheet .b3row{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-bottom:1px dotted var(--rule);font-size:13px;}
+  .dsheet .box{width:16px;height:16px;border:1.5px solid var(--navy);border-radius:4px;flex:0 0 auto;margin-top:1px;}
+  .dsheet .signalbox{border-left:4px solid var(--iris);background:var(--lav-soft);border-radius:0 8px 8px 0;padding:9px 13px;font-size:14px;margin-bottom:13px;}
+  .dsheet .signalbox b{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--iris);display:block;margin-bottom:4px;font-weight:700;}
+  .dsheet table.dsched{width:100%;border-collapse:collapse;font-size:10.5px;}
+  .dsheet table.dsched td{padding:3px 4px;border-bottom:1px solid #EEF2F8;vertical-align:top;}
+  .dsheet table.dsched td.tt{width:82px;color:var(--navy);font-weight:700;font-variant-numeric:tabular-nums;}
+  .dsheet .kchips{display:flex;flex-wrap:wrap;gap:6px;}
+  .dsheet .kchip{border:1px solid var(--rule);border-radius:16px;padding:5px 11px;font-size:11.5px;display:flex;align-items:center;gap:6px;}
+  .dsheet .kbox{width:13px;height:13px;border:1.5px solid var(--navy);border-radius:3px;}
+  .dsheet .dverse{font-style:italic;color:var(--pine-soft);font-size:12px;border-left:2px solid var(--sky);padding-left:9px;line-height:1.5;}
+  .dsheet .gratline{border-bottom:1px dotted var(--rule);height:19px;margin-top:5px;}
+  .dsheet .dfoot{margin-top:14px;border-top:2px solid var(--navy);padding-top:8px;text-align:center;font-family:var(--font-mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);}
+  @media print{.dsheet .goalbox,.dsheet .signalbox,.dsheet .dhead,.dsheet .dfoot,.lA,.lB,.lC,.loff{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
   #printPreview{display:none;position:fixed;inset:0;z-index:60;background:var(--paper);overflow-y:auto;-webkit-overflow-scrolling:touch;}
   #printPreview.show{display:block;}
   #printPreview .ppbar{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--navy);color:#fff;padding:max(10px,env(safe-area-inset-top)) 14px 10px;z-index:2;}
@@ -265,12 +293,13 @@
 <header>
   <div class="wrap" style="padding:0;display:flex;align-items:center;gap:12px;">
     <span class="b8m" aria-hidden="true" style="flex:0 0 auto;line-height:0;"><svg viewBox="0 0 40 64" width="24" height="38"><circle cx="20" cy="17" r="12.6" fill="none" stroke="var(--iris)" stroke-width="3.6"/><circle cx="20" cy="45" r="12.6" fill="none" stroke="var(--signal)" stroke-width="3.6"/><circle cx="20" cy="31" r="3.3" fill="var(--navy)"/></svg></span>
-    <div style="flex:1;min-width:0;">
-      <div class="eyebrow">Access 8 Global · Full Focus</div>
+    <div style="flex:1;min-width:0;padding-right:52px;">
+      <div class="eyebrow">Access 8 Global</div>
       <h1 id="hTitle">Good morning, Jennifer</h1>
       <div class="sub" id="hSub">—</div>
     </div>
   </div>
+  <button id="fontBtn" class="searchbtn" style="right:60px;font-weight:800;font-family:var(--font-serif);" aria-label="Text size">A⁺</button>
   <button id="searchBtn" class="searchbtn" aria-label="Search">🔍</button>
 </header>
 
@@ -308,11 +337,12 @@
             <input id="goalTgtIn" type="number" inputmode="numeric" placeholder="Target amount, e.g. 10000" style="width:100%;box-sizing:border-box;border:1px solid var(--rule);border-radius:9px;padding:9px;font-size:14px;font-family:inherit;margin-top:8px;">
             <button id="goalSave" class="btn small" style="width:100%;margin-top:9px;">Save goal</button>
           </div>
-          <div class="muted" style="font-size:11px;margin-top:9px;border-top:1px solid var(--rule);padding-top:8px;line-height:1.6;"><b style="color:var(--pine);">WINSTACK path:</b> <b>Identity</b> — I'm someone who builds revenue daily. <b>Constraint</b> — today's ONE MVP move (make it your Pure Signal). <b>Systems</b> — the Monday 10x block + a daily first domino. <b>Intensity</b> — one mark every day; starting is the contract, not finishing.</div>
+          <button class="infobtn" data-info="goalWhy">ⓘ Why this works</button>
+          <div id="goalWhy" class="muted" style="display:none;font-size:11px;margin-top:4px;border-top:1px solid var(--rule);padding-top:8px;line-height:1.6;"><b style="color:var(--pine);">WINSTACK path:</b> <b>Identity</b> — I'm someone who builds revenue daily. <b>Constraint</b> — today's ONE MVP move (make it your Pure Signal). <b>Systems</b> — the Monday 10x block + a daily first domino. <b>Intensity</b> — one mark every day; starting is the contract, not finishing.</div>
         </div>
         <div class="card" id="momentumCard" style="border-left:4px solid var(--brass);">
           <div class="between"><span class="eyebrow">Pure Signal · today's one thing</span><button id="stuckBtn" class="btn ghost small" style="width:auto;padding:5px 10px;font-size:12px;">I'm stuck?</button></div>
-          <input id="pureSignal" placeholder="What's the ONE thing to focus on today?" style="width:100%;border:0;border-bottom:2px solid var(--rule);font-size:16px;font-family:inherit;padding:6px 0 4px;background:transparent;color:var(--pine);outline:none;margin-top:6px;">
+          <textarea id="pureSignal" rows="1" placeholder="What's the ONE thing to focus on today?" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--rule);font-size:16px;font-family:inherit;padding:6px 0 4px;background:transparent;color:var(--pine);outline:none;margin-top:6px;resize:none;overflow:hidden;line-height:1.45;min-height:30px;"></textarea>
           <button id="oneMarkBtn" class="btn" style="margin-top:10px;">▷ ONE MARK — just touch it</button>
           <div id="oneMarkCoach" class="muted" style="display:none;margin-top:8px;font-size:12.5px;">One mark — no finish pressure. Work to the peak, then stop &amp; rest. ↻ Begin.</div>
           <div id="stallCheck" style="display:none;margin-top:10px;border-top:1px solid var(--rule);padding-top:8px;">
@@ -358,7 +388,6 @@
             <input id="capInput" placeholder="Jot anything — sort it later…" autocomplete="off" style="flex:1;min-width:0;border:0;border-bottom:2px solid var(--rule);font-size:15px;font-family:inherit;padding:6px 0;background:transparent;color:var(--pine);outline:none;">
             <button id="capAdd" class="btn small" style="width:auto;">Add</button>
           </div>
-          <div class="muted" style="font-size:11.5px;margin-top:7px;">Add an item — each one gets a <b>📅 Add to schedule</b> and <b>🧠 Add to Brain Release</b> button.</div>
           <ul id="capList" style="list-style:none;margin:10px 0 0;padding:0;"></ul>
         </div>
         <div class="card" id="comingCard" style="display:none;">
@@ -436,6 +465,7 @@
             3 · Name tomorrow's ★ first domino, then close the app.
           </div>
           <div style="margin-top:10px;background:var(--brass-pale);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--pine);text-align:center;"><b>You did enough today.</b> Rest well. 🕯</div>
+          <button class="btn ghost small" data-print="today" style="width:auto;margin-top:11px;">🖨 Print today's sheet</button>
         </div>
         <div class="card" id="shabbatCard" style="display:none;border:1.5px solid var(--brass);background:var(--brass-pale);">
           <div class="eyebrow" style="color:var(--pine);">🕯 Shabbat</div>
@@ -534,6 +564,18 @@
 
   <!-- ============ MORE ============ -->
   <section id="more" class="view">
+    <div class="card" id="logoutTop" style="border-left:4px solid var(--signal);">
+      <div class="between"><span class="eyebrow">Account</span><button class="btn ghost small" id="logoutBtn2" style="width:auto;">↪ Log out</button></div>
+    </div>
+    <div class="card" id="fontCard">
+      <div class="eyebrow">Text size</div>
+      <p class="muted" style="font-size:12.5px;margin:6px 0 9px;">Make everything bigger — easy to read at the gym without your glasses. You can also tap the <b>A⁺</b> button at the top of any screen.</p>
+      <div class="row" style="gap:8px;">
+        <button class="btn ghost small" data-fs="0" style="flex:1;">Normal</button>
+        <button class="btn ghost small" data-fs="1" style="flex:1;">Large</button>
+        <button class="btn ghost small" data-fs="2" style="flex:1;">X-Large</button>
+      </div>
+    </div>
     <div id="system">
     <style>
       #system .wm{position:relative;}
@@ -628,7 +670,7 @@
       <div class="eyebrow">Sources &amp; attribution</div>
       <p class="src" style="margin-top:8px;">
         <b>The 1·2·3 System — WINSTACK, Pure Signal Card, ONE MARK, and the narrative quote:</b> © Jeff Heilman. Used with Jennifer's permission for personal use. Private — not for distribution or resale.<br><br>
-        <b>Supporting frameworks, cited:</b> Eliyahu M. Goldratt, <em>The Goal</em> (Theory of Constraints — the "constraint / bottleneck" spine). Dan Sullivan &amp; Dr. Benjamin Hardy, <em>10x Is Easier Than 2x</em>. Michael Hyatt, <em>Free to Focus</em> &amp; the <em>Full Focus Planner</em> (Yearly→Quarterly→Weekly→Daily cadence, Big 3). Tony Robbins, <em>Awaken the Giant Within</em> (power questions). Viktor E. Frankl, <em>Man's Search for Meaning</em> (meaning first). Scripture as cited in-app.
+        <b>Supporting frameworks, cited:</b> Eliyahu M. Goldratt, <em>The Goal</em> (Theory of Constraints — the "constraint / bottleneck" spine). Dan Sullivan &amp; Dr. Benjamin Hardy, <em>10x Is Easier Than 2x</em>. Michael Hyatt, <em>Free to Focus</em> (Yearly→Quarterly→Weekly→Daily cadence, Big 3). Tony Robbins, <em>Awaken the Giant Within</em> (power questions). Viktor E. Frankl, <em>Man's Search for Meaning</em> (meaning first). Scripture as cited in-app.
       </p>
       <div class="ipfoot">The 1·2·3 System © Jeff Heilman — used with permission. Private. Not for distribution.</div>
     </div>
@@ -704,7 +746,8 @@
       <h2 class="serif">Print a calendar</h2>
       <p class="muted">Each one is fully populated from your school calendar (A/B days, classes, meetings, events) and your Big 3. Tap one to <b>preview it on screen</b>, then tap <b>Print / Save PDF</b> — or screenshot it. (On iPhone you can also use Safari’s Share → Print.)</p>
       <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
-        <button class="btn" data-print="day">Daily — today</button>
+        <button class="btn" data-print="today" style="background:var(--iris);border-color:var(--iris);">🖨 Today — beautiful daily sheet</button>
+        <button class="btn ghost" data-print="day">Daily — blank grid</button>
         <button class="btn" data-print="week">Weekly — this week</button>
         <button class="btn" data-print="month">Monthly — this month</button>
         <button class="btn" data-print="quarter">Quarterly — this quarter</button>
@@ -1302,6 +1345,12 @@ function applySeeds(){
  });
  saveSilent();
 }
+var FS_LEVELS=[1,1.16,1.32], FS_LABELS=["Normal","Large","X-Large"];
+function fsGet(){var i=0;try{i=parseInt(localStorage.getItem("a8_fs")||"0",10);}catch(e){}return (i>=0&&i<FS_LEVELS.length)?i:0;}
+function fsApply(){var i=fsGet();document.body.style.zoom=FS_LEVELS[i];document.querySelectorAll('[data-fs]').forEach(function(b){b.classList.toggle('on',(+b.getAttribute('data-fs'))===i);});}
+function fsSet(i){try{localStorage.setItem("a8_fs",String(i));}catch(e){}fsApply();toastMsg("Text size: "+FS_LABELS[i]);}
+function fsCycle(){fsSet((fsGet()+1)%FS_LEVELS.length);}
+function toastMsg(m){var t=document.getElementById("savedToast");if(!t)return;t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove("show");setTimeout(function(){t.textContent="Saved ✓";},260);},1200);}
 var toastT;function toast(){var t=document.getElementById("savedToast");t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove("show");},1100);}
 function todayISO(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
 function dayRec(iso){if(!DB.daily[iso])DB.daily[iso]={big3:[false,false,false],big3text:["","",""]};if(!DB.daily[iso].big3text)DB.daily[iso].big3text=["","",""];return DB.daily[iso];}
@@ -1344,7 +1393,7 @@ function renderToday(){
  })(i);}
  setV("k_calories",rec.calories);setV("k_protein",rec.protein);setV("k_water",rec.water);setV("k_steps",rec.steps);setV("k_acsi",rec.acsi);setV("k_notes",rec.notes);
  tog("prayer",rec.prayer);tog("workout",rec.workout);tog("emails",rec.emails);
- var ps=document.getElementById("pureSignal");if(ps)ps.value=rec.signal||"";
+ var ps=document.getElementById("pureSignal");if(ps){ps.value=rec.signal||"";autoGrow(ps);}
  var s=document.getElementById("tSched");s.innerHTML="";
  buildSched(fromISO(iso)).forEach(function(r){var li=document.createElement("li");
    if(r[2])li.style.cssText="border-left:3px solid "+r[2]+";padding-left:8px;";
@@ -1747,14 +1796,47 @@ function buildWins(mon){
  // gratitude full-width
  h+='<div style="margin-top:10px;">'+winsBranch("🌿","Gratitude", w.grat, "#A9822F")+'</div>';
  h+='<div style="text-align:center;margin-top:16px;font-style:italic;color:#2F5445;font-size:12.5px;">"How blessed are the people whose God is the Lord." — Psalm 144:15 (AMP)</div>';
- h+='<div style="text-align:center;font-size:9px;color:#9a958a;margin-top:6px;">Wins of the Week · your Full Focus planner</div>';
+ h+='<div style="text-align:center;font-size:9px;color:#9a958a;margin-top:6px;">Wins of the Week · your A8 Planner</div>';
+ return h+'</div>';
+}
+function printDayPretty(dt){
+ var info=dayInfo(dt),iso=toISO(dt),rec=DB.daily[iso]||{};
+ var tgt=goalTarget(),have=revTotal(),pct=Math.min(100,Math.round(have/tgt*100));
+ var f=(typeof scripFocus==="function")?scripFocus():null;
+ var q=AUTHOR_QUOTES[dayOfYear()%AUTHOR_QUOTES.length];
+ var mark='<svg viewBox="0 0 40 64" width="28" height="44"><circle cx="20" cy="17" r="12.6" fill="none" stroke="#5E3FC0" stroke-width="3.6"/><circle cx="20" cy="45" r="12.6" fill="none" stroke="#3A5BD9" stroke-width="3.6"/><circle cx="20" cy="31" r="3.3" fill="#10243F"/></svg>';
+ var h='<div class="dsheet">';
+ h+='<div class="dhead"><span>'+mark+'</span><div style="flex:1;"><div class="deyebrow">A8 Planner · Daily</div><div class="ddate">'+info.wdName+', '+MONTHS[dt.getMonth()]+' '+dt.getDate()+'</div><div class="dbadge">'+esc(info.badge+(info.label?" · "+info.label:""))+'</div></div></div>';
+ h+='<div class="signalbox"><b>Pure Signal · today\u2019s one thing</b>'+(rec.signal?esc(rec.signal):"\u2014")+'</div>';
+ h+='<div class="dcols"><div>';
+ h+='<div class="dsec"><div class="dlab">#1 Goal · North Star</div><div class="goalbox"><div class="gt">'+esc(goalTitleText())+'</div><div class="gbar"><span style="width:'+pct+'%;"></span></div><div style="font-size:11px;color:var(--muted);">$'+have.toLocaleString()+' of $'+Number(tgt).toLocaleString()+' · '+pct+'%</div></div></div>';
+ h+='<div class="dsec"><div class="dlab">Daily Big 3 · first dominoes</div>';
+ for(var i=0;i<3;i++){var t=(rec.big3text&&rec.big3text[i])||"";h+='<div class="b3row"><span class="box"></span><span>'+(t?esc(t):"")+'</span></div>';}
+ h+='</div>';
+ h+='<div class="dsec"><div class="dlab">Today\u2019s targets</div><div class="kchips">'+
+    '<span class="kchip"><span class="kbox"></span>\uD83D\uDCA7 Water · 1 gal</span>'+
+    '<span class="kchip"><span class="kbox"></span>\uD83D\uDC5F Steps · 15k</span>'+
+    '<span class="kchip"><span class="kbox"></span>\uD83C\uDF57 Protein · 160g</span>'+
+    '<span class="kchip"><span class="kbox"></span>\uD83D\uDE4F Prayer</span>'+
+    '<span class="kchip"><span class="kbox"></span>\uD83D\uDCAA Move</span>'+
+    '<span class="kchip"><span class="kbox"></span>\u2709\uFE0F Emails cleared</span></div></div>';
+ h+='</div><div>';
+ h+='<div class="dsec"><div class="dlab">Today\u2019s rhythm</div><table class="dsched">';
+ buildSched(dt).forEach(function(rw){h+='<tr><td class="tt">'+esc(rw[0])+'</td><td'+(rw[2]?' style="border-left:3px solid '+rw[2]+';padding-left:6px;"':'')+'>'+esc(rw[1])+'</td></tr>';});
+ h+='</table></div>';
+ if(f&&f.t){h+='<div class="dsec"><div class="dlab">Scripture focus</div><div class="dverse">\u201C'+esc(f.t)+'\u201D \u2014 <b>'+esc(f.ref)+'</b> (AMP)</div></div>';}
+ if(q){h+='<div class="dsec"><div class="dlab">Today\u2019s wisdom</div><div class="dverse" style="border-left-color:var(--iris);">\u201C'+esc(q.q)+'\u201D \u2014 '+esc(q.a)+(q.s?", "+esc(q.s):"")+'</div></div>';}
+ h+='</div></div>';
+ h+='<div class="dsec"><div class="dlab">\uD83D\uDE4F Gratitude · tonight</div>'+(rec.notes?'<div style="font-size:12.5px;">'+esc(rec.notes)+'</div>':'<div class="gratline"></div><div class="gratline"></div>')+'</div>';
+ h+='<div style="font-size:11px;color:var(--muted);font-style:italic;">Evening: celebrate your Big 3, log gratitude, name tomorrow\u2019s first domino. You did enough today.</div>';
+ h+='<div class="dfoot">Access 8 Global · Human capability for the AI age · Live it. Build it. Pass it on.</div>';
  return h+'</div>';
 }
 function printScope(scope){var d=new Date();
- var html=scope==="day"?printDay(d):scope==="week"?printWeek(d):scope==="month"?printMonth(d):scope==="quarter"?printQuarter(d):scope==="wins"?buildWins(weekMon(d)):printYear();
+ var html=scope==="today"?printDayPretty(d):scope==="day"?printDay(d):scope==="week"?printWeek(d):scope==="month"?printMonth(d):scope==="quarter"?printQuarter(d):scope==="wins"?buildWins(weekMon(d)):printYear();
  document.getElementById("printArea").innerHTML=html;
  document.getElementById("ppBody").innerHTML=html;
- var names={day:"Daily",week:"Weekly",month:"Monthly",quarter:"Quarterly",year:"Yearly",wins:"Weekly Wins"};
+ var names={today:"Daily sheet",day:"Daily",week:"Weekly",month:"Monthly",quarter:"Quarterly",year:"Yearly",wins:"Weekly Wins"};
  document.getElementById("ppTitle").textContent=(names[scope]||"")+" preview";
  var ov=document.getElementById("printPreview");ov.classList.add("show");ov.scrollTop=0;
 }
@@ -1819,10 +1901,13 @@ function gateSignUp(){
 }
 function onSignedIn(u){
  sbUser=u; IS_OWNER=computeOwner(u.email);
- var last=null;try{last=localStorage.getItem("a8_last_uid");}catch(e){}
- if(last!==u.id){DB=blankDB();try{localStorage.setItem("a8_last_uid",u.id);}catch(e){}}
+ /* Only wipe local data on a genuine account SWITCH (a different user's data
+    is sitting in this browser). Missing uid = existing/first-time user on this
+    device — keep their data and just stamp it. */
+ if(DB.meta&&DB.meta.uid&&DB.meta.uid!==u.id){DB=blankDB();}
+ if(!DB.meta)DB.meta={};DB.meta.uid=u.id;
  try{localStorage.setItem("a8_owner",IS_OWNER?"1":"0");}catch(e){}
- if(_pendingName){if(!DB.meta)DB.meta={};DB.meta.name=_pendingName;_pendingName="";}
+ if(_pendingName){DB.meta.name=_pendingName;_pendingName="";}
  if(IS_OWNER)applySeeds();
  var o=document.getElementById("syncOut"),i=document.getElementById("syncIn"),who=document.getElementById("syWho");
  if(o)o.style.display="none";if(i)i.style.display="block";if(who)who.textContent=u.email||"you";
@@ -1879,7 +1964,12 @@ window.addEventListener("focus",function(){if(sb&&sbUser)pullRemote(true);});
  var ge=document.getElementById("gEmail");if(ge)ge.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();document.getElementById("gPass").focus();}});})();
 document.getElementById("goalEditBtn").onclick=function(){var ed=document.getElementById("goalEdit");var open=ed.style.display!=="none";ed.style.display=open?"none":"block";if(!open){document.getElementById("goalTitleIn").value=(DB.meta&&DB.meta.goalTitle)||"";document.getElementById("goalTgtIn").value=(DB.meta&&DB.meta.goalTarget)||"";}};
 document.getElementById("goalSave").onclick=saveGoalEdit;
+document.querySelectorAll('[data-info]').forEach(function(b){b.onclick=function(){var el=document.getElementById(b.getAttribute("data-info"));if(el)el.style.display=(el.style.display==="none"||!el.style.display)?"block":"none";};});
 document.getElementById("logoutBtn").onclick=doSignOut;
+document.getElementById("logoutBtn2").onclick=doSignOut;
+document.getElementById("fontBtn").onclick=fsCycle;
+document.querySelectorAll('[data-fs]').forEach(function(b){b.onclick=function(){fsSet(+b.getAttribute("data-fs"));};});
+fsApply();
 document.getElementById("syIn").onclick=doSignIn;
 document.getElementById("syUp").onclick=doSignUp;
 document.getElementById("syOut").onclick=doSignOut;
@@ -1901,6 +1991,7 @@ document.getElementById("searchBtn").onclick=function(){show("search");setTimeou
 document.getElementById("qInput").addEventListener("input",doSearch);
 document.getElementById("qClear").onclick=function(){document.getElementById("qInput").value="";document.getElementById("qResults").innerHTML="";show("today");};
 document.getElementById("pureSignal").addEventListener("change",function(){var rec=dayRec(currentView());rec.signal=this.value;save();});
+document.getElementById("pureSignal").addEventListener("input",function(){autoGrow(this);});
 document.getElementById("dPrev").onclick=function(){viewISO=toISO(addDays(fromISO(currentView()),-1));renderToday();};
 document.getElementById("dNext").onclick=function(){viewISO=toISO(addDays(fromISO(currentView()),1));renderToday();};
 document.getElementById("dToday").onclick=function(){viewISO=null;renderToday();};
