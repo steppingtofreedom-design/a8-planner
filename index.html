@@ -34,11 +34,13 @@
   .card{overflow:hidden;}
   h1,h2,h3{font-family:var(--font-serif);font-weight:600;margin:0;}
   .serif{font-family:var(--font-serif);}
-  header{background:var(--sky);color:var(--graphite);padding:14px 16px calc(14px + env(safe-area-inset-top)) 16px;padding-top:max(14px,env(safe-area-inset-top));position:sticky;top:0;z-index:20;border-bottom:2px solid var(--navy);}
-  header .eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--iris);font-weight:700;}
-  header h1{font-size:20px;color:var(--graphite);line-height:1.15;margin-top:2px;}
-  header .sub{font-size:12px;color:var(--pine-soft);margin-top:2px;}
-  .wrap{max-width:640px;margin:0 auto;padding:14px 14px 20px;}
+  header{background:var(--navy);color:#fff;padding:max(10px,env(safe-area-inset-top)) 16px 11px;position:sticky;top:0;z-index:20;}
+  .hlock{display:flex;align-items:center;justify-content:center;gap:9px;font-family:var(--font-sans);font-weight:800;font-size:19px;color:#fff;letter-spacing:-.005em;}
+  .hlock svg{flex:0 0 auto;}
+  .hgreet{margin-top:7px;padding-right:92px;}
+  header h1{font-family:var(--font-serif);font-weight:600;font-size:20px;color:#fff;line-height:1.15;}
+  header .sub{font-size:12px;color:#AEC6E6;margin-top:2px;}
+  .wrap{max-width:640px;margin:0 auto;padding:9px 14px 20px;}
   .view{display:none;} .view.active{display:block;animation:f .2s ease;}
   @keyframes f{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
   .card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:14px 15px;margin:0 0 14px;box-shadow:0 1px 2px rgba(0,0,0,.03);}
@@ -126,7 +128,7 @@
   .saved{position:fixed;bottom:86px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;opacity:0;transition:.25s;z-index:40;pointer-events:none;}
   .saved.show{opacity:1;transform:translateX(-50%) translateY(0);}
   .verse{font-style:italic;color:var(--pine-soft);font-size:13.5px;border-left:3px solid var(--brass);padding-left:10px;}
-  .searchbtn{position:absolute;top:max(12px,env(safe-area-inset-top));right:14px;background:rgba(16,36,63,.09);border:0;color:var(--navy);width:38px;height:38px;border-radius:10px;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .searchbtn{position:absolute;top:max(10px,env(safe-area-inset-top));right:14px;background:rgba(255,255,255,.15);border:0;color:#fff;width:36px;height:36px;border-radius:10px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
   .qres{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 12px;margin-bottom:8px;cursor:pointer;}
   .qres:active{background:#EDF3FC;}
   .qres .qcat{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--brass);font-weight:700;}
@@ -271,6 +273,16 @@
   #printPreview .ppbar{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--navy);color:#fff;padding:max(10px,env(safe-area-inset-top)) 14px 10px;z-index:2;}
   #printPreview .pptitle{font-weight:700;font-size:13px;color:#fff;flex:1;text-align:center;}
   #ppBody{max-width:8.2in;margin:0 auto;padding:16px 14px calc(48px + env(safe-area-inset-bottom));}
+
+  /* ---- Desktop: use the wider screen (phone layout is unchanged below 900px) ---- */
+  @media(min-width:900px){
+    .wrap{max-width:1000px;}
+    .hgreet{max-width:1000px;margin-left:auto;margin-right:auto;padding-right:0;}
+    #today .moment.open .mbody{display:grid;grid-template-columns:1fr 1fr;column-gap:16px;row-gap:0;align-items:start;}
+    #week.view.active,#progress.view.active,#more.view.active{display:grid;grid-template-columns:1fr 1fr;column-gap:16px;row-gap:0;align-items:start;}
+    nav.tabs{padding-left:calc(50% - 500px);padding-right:calc(50% - 500px);}
+    #printPreview #ppBody{max-width:8.2in;}
+  }
 </style>
 </head>
 <body>
@@ -296,15 +308,9 @@
 </div>
 
 <header>
-  <div class="wrap" style="padding:0;display:flex;align-items:center;gap:12px;">
-    <span class="b8m" aria-hidden="true" style="flex:0 0 auto;line-height:0;"><svg viewBox="0 0 40 64" width="24" height="38"><circle cx="20" cy="17" r="12.6" fill="none" stroke="var(--iris)" stroke-width="3.6"/><circle cx="20" cy="45" r="12.6" fill="none" stroke="var(--signal)" stroke-width="3.6"/><circle cx="20" cy="31" r="3.3" fill="var(--navy)"/></svg></span>
-    <div style="flex:1;min-width:0;padding-right:52px;">
-      <div class="eyebrow">Access 8 Global</div>
-      <h1 id="hTitle">Good morning, Jennifer</h1>
-      <div class="sub" id="hSub">—</div>
-    </div>
-  </div>
-  <button id="fontBtn" class="searchbtn" style="right:60px;font-weight:800;font-family:var(--font-serif);" aria-label="Text size">A⁺</button>
+  <div class="hlock" aria-label="Access 8 Global"><span>Access</span><svg class="b8n" viewBox="0 0 40 64" width="20" height="32" aria-hidden="true"><circle cx="20" cy="17" r="12.6" fill="none" stroke="#C3B4F5" stroke-width="3.6"/><circle cx="20" cy="45" r="12.6" fill="none" stroke="#9DBEF0" stroke-width="3.6"/><circle cx="20" cy="31" r="3.2" fill="#F6F6FA"/></svg><span>Global</span></div>
+  <div class="hgreet"><h1 id="hTitle">Good morning, Jennifer</h1><div class="sub" id="hSub">—</div></div>
+  <button id="fontBtn" class="searchbtn" style="right:56px;font-weight:800;" aria-label="Text size">A⁺</button>
   <button id="searchBtn" class="searchbtn" aria-label="Search">🔍</button>
 </header>
 
@@ -489,15 +495,22 @@
       <div class="between"><span class="eyebrow">🧠 Sunday brain dump &amp; weekly reset</span><span class="muted" id="bdWk" style="font-size:11px;"></span></div>
       <p class="muted" style="margin:6px 0 6px;font-size:12px;">Empty your head here every Sunday — every task, worry, idea, errand. Then pull the 3 biggest into your Weekly Big 3 below, and let the rest wait. This saves per week.</p>
       <textarea id="bdText" placeholder="Dump everything for this week here…&#10;• &#10;• &#10;• " style="min-height:120px;"></textarea>
+      <button id="bdSortBtn" class="btn" style="margin-top:10px;background:var(--iris);border-color:var(--iris);">✨ Sort &amp; place into my week</button>
+      <div id="bdSummary" style="display:none;font-size:12px;margin-top:9px;border:1px solid var(--rule);border-radius:9px;padding:10px 11px;line-height:1.65;"></div>
       <div class="muted" id="bdSteps" style="font-size:11.5px;margin-top:8px;line-height:1.7;">
-        <b style="color:var(--pine);">The Sunday reset (10 min):</b><br>
+        <b style="color:var(--pine);">The Sunday reset (5 min):</b><br>
         1 · Dump it all above — don't filter.<br>
-        2 · Circle the ONE constraint — the bottleneck everything waits behind.<br>
-        3 · Choose your Weekly Big 3 (below). ✂ Quit what doesn't serve this week.<br>
+        2 · Tap <b>✨ Sort &amp; place</b> — it sorts by your goals (family &amp; faith first, then revenue &amp; assets) and drops every item into your Daily Big 3, your schedule, and a “Later this week” list. Nothing gets missed.<br>
+        3 · Tweak anything below, and ✂ quit what doesn't serve this week.<br>
         4 · Protect Shabbat, prayer, family, and workouts first — plan around them.
       </div>
     </div>
     </div></div>
+    <div class="card" id="bdParkCard" style="display:none;border-left:4px solid var(--iris);">
+      <div class="between"><span class="eyebrow" style="color:var(--iris);">🅿 Later this week</span><span class="muted" id="bdParkCount" style="font-size:11px;"></span></div>
+      <p class="muted" style="font-size:11.5px;margin:5px 0 8px;">Items that didn’t fit this week — nothing is lost. Check one off, delete it, or push it into your Big 3.</p>
+      <ul id="bdPark" style="list-style:none;margin:0;padding:0;"></ul>
+    </div>
     <div class="card">
       <div class="eyebrow">Weekly Big 3 · this week</div>
       <div class="b3"><ul id="wBig3" style="margin-top:6px;"></ul></div>
@@ -1100,16 +1113,22 @@ var PSALM144=[
  "Let our cattle bear Without mishap and without loss, And let there be no outcry in our streets!",
  "How blessed and favored are the people in such circumstance; How blessed [fortunate, prosperous, and favored] are the people whose God is the Lord!"
 ];
-function scripRec(){if(!DB.scripture)DB.scripture={};var s=DB.scripture;if(!s.solid)s.solid={};if(!s.psalm)s.psalm={};if(!s.start)s.start=todayISO();return s;}
-function scripFocus(){var s=scripRec();
- for(var i=0;i<SCRIP.length;i++){if(!s.solid[SCRIP[i].ref])return {type:"verse",ref:SCRIP[i].ref,t:SCRIP[i].t};}
+function scripRec(){if(!DB.scripture)DB.scripture={};var s=DB.scripture;if(!s.solid)s.solid={};if(!s.psalm)s.psalm={};if(!s.custom)s.custom=[];if(!s.start)s.start=todayISO();return s;}
+function scripAllVerses(){var s=scripRec();return SCRIP.concat(s.custom||[]);}
+function scripFocus(){var s=scripRec();var all=scripAllVerses();
+ for(var i=0;i<all.length;i++){if(!s.solid[all[i].ref])return {type:"verse",ref:all[i].ref,t:all[i].t};}
  for(var n=1;n<=15;n++){if(!s.psalm[n])return {type:"psalm",n:n,ref:"Psalm 144:"+n,t:PSALM144[n-1]};}
  return {type:"done",ref:"Whole set — recite it all",t:""};
 }
-function scripProgress(){var s=scripRec(),vs=0,ps=0;SCRIP.forEach(function(x){if(s.solid[x.ref])vs++;});for(var n=1;n<=15;n++)if(s.psalm[n])ps++;return {vs:vs,ps:ps};}
+function addCustomVerse(){var refEl=document.getElementById("nvRef"),txtEl=document.getElementById("nvText");if(!refEl||!txtEl)return;
+ var ref=refEl.value.trim(),t=txtEl.value.trim();var msg=document.getElementById("nvMsg");
+ if(!ref||!t){if(msg){msg.textContent="Enter a reference and paste the verse text.";msg.style.color="var(--flag)";}return;}
+ var s=scripRec();if(!s.custom)s.custom=[];s.custom.push({id:"v"+Date.now(),ref:ref,t:t});save();
+ refEl.value="";txtEl.value="";renderScrip();toast();}
+function scripProgress(){var s=scripRec(),all=scripAllVerses(),vs=0,ps=0;all.forEach(function(x){if(s.solid[x.ref])vs++;});for(var n=1;n<=15;n++)if(s.psalm[n])ps++;return {vs:vs,ps:ps,total:all.length};}
 function renderScrip(){
  var s=scripRec(),f=scripFocus(),pr=scripProgress(),ti=todayISO();
- var prog=document.getElementById("scripProg");if(prog)prog.textContent=pr.vs+"/7 · Ps144 "+pr.ps+"/15";
+ var prog=document.getElementById("scripProg");if(prog)prog.textContent=pr.vs+"/"+pr.total+" · Ps144 "+pr.ps+"/15";
  var fo=document.getElementById("scripFocus");
  if(fo){
    if(f.type==="done")fo.innerHTML='<b style="color:var(--pine);">🎉 All memorized — recite the whole set today to keep it deep.</b>';
@@ -1126,11 +1145,26 @@ function renderScrip(){
 function scripReveal(){var t=document.getElementById("scripText"),r=document.getElementById("scripReveal");var hid=t.style.display==="none";t.style.display=hid?"block":"none";r.textContent=hid?"Hide":"Reveal to check";}
 function scripMarkSolid(){var s=scripRec(),f=scripFocus();if(f.type==="verse")s.solid[f.ref]=1;else if(f.type==="psalm")s.psalm[f.n]=1;save();renderScrip();}
 function scripDone(){var s=scripRec(),ti=todayISO();if(s.last===ti)return;var y=toISO(addDays(fromISO(ti),-1));s.streak=(s.last===y?(s.streak||0)+1:1);s.last=ti;save();renderScrip();toast();}
-function renderScripAll(){var box=document.getElementById("scripAll");if(!box)return;var s=scripRec();
- var h='<div class="eyebrow" style="margin-bottom:6px;">The 7 verses (AMP)</div>';
- SCRIP.forEach(function(x){h+='<div style="border-top:1px solid var(--rule);padding:9px 0;"><div style="display:flex;justify-content:space-between;gap:8px;"><b style="color:var(--pine);font-size:13.5px;">'+x.ref+'</b><span style="font-size:11px;color:'+(s.solid[x.ref]?"var(--good)":"var(--muted)")+';font-weight:700;">'+(s.solid[x.ref]?"✓ solid":"learning")+'</span></div><div class="muted" style="font-size:12.5px;line-height:1.55;margin-top:4px;">'+esc(x.t)+'</div></div>';});
- h+='<div class="eyebrow" style="margin:14px 0 6px;">Psalm 144 (AMP) · add-a-verse</div>';
- for(var n=1;n<=15;n++){h+='<div style="border-top:1px solid var(--rule);padding:7px 0;display:flex;gap:8px;"><b style="color:'+(s.psalm[n]?"var(--good)":"var(--pine)")+';font-size:12px;flex:0 0 22px;">'+n+(s.psalm[n]?"✓":"")+'</b><div class="muted" style="font-size:12.5px;line-height:1.5;">'+esc(PSALM144[n-1])+'</div></div>';}
+function scripPill(on){return '<span style="font-size:9.5px;font-family:var(--font-mono);letter-spacing:.05em;color:'+(on?"#fff":"var(--muted)")+';font-weight:700;background:'+(on?"var(--good)":"transparent")+';border:1px solid '+(on?"var(--good)":"var(--rule)")+';border-radius:14px;padding:4px 10px;white-space:nowrap;">'+(on?"SOLID ✓":"LEARNING")+'</span>';}
+function renderScripAll(){var box=document.getElementById("scripAll");if(!box)return;var s=scripRec();var all=scripAllVerses();
+ var h='<div class="eyebrow" style="margin-bottom:6px;">Your verses · tap the tag to move Learning ⇄ Solid</div>';
+ all.forEach(function(x){var on=!!s.solid[x.ref];var custom=!!x.id;
+   h+='<div style="border-top:1px solid var(--rule);padding:10px 0;"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center;">'
+     +'<b style="color:var(--pine);font-size:13.5px;">'+esc(x.ref)+'</b>'
+     +'<div class="row" style="gap:7px;flex:0 0 auto;">'
+     +'<button data-toggle-ref="'+esc(x.ref)+'" style="border:0;background:transparent;cursor:pointer;padding:0;">'+scripPill(on)+'</button>'
+     +(custom?'<button data-del-verse="'+esc(x.id)+'" aria-label="Delete verse" style="border:0;background:transparent;color:var(--muted);font-size:14px;cursor:pointer;padding:0 2px;">✕</button>':'')
+     +'</div></div><div class="muted" style="font-size:12.5px;line-height:1.55;margin-top:4px;">'+esc(x.t)+'</div></div>';});
+ h+='<div style="border-top:1px solid var(--rule);margin-top:8px;padding-top:12px;"><div class="eyebrow" style="margin-bottom:6px;">➕ Add a verse</div>'
+   +'<input id="nvRef" placeholder="Reference — e.g. Philippians 4:13" style="width:100%;box-sizing:border-box;border:1px solid var(--rule);border-radius:9px;padding:9px;font-size:14px;font-family:inherit;">'
+   +'<textarea id="nvText" placeholder="Paste the verse text…" style="width:100%;box-sizing:border-box;border:1px solid var(--rule);border-radius:9px;padding:9px;font-size:13.5px;font-family:inherit;margin-top:8px;min-height:64px;resize:vertical;"></textarea>'
+   +'<button id="nvAdd" class="btn small" style="width:100%;margin-top:9px;">Add verse to memory</button>'
+   +'<div id="nvMsg" class="muted" style="font-size:10.5px;margin-top:6px;">New verses join your daily drill as “Learning.” Tap the tag anytime to mark Solid or move it back.</div></div>';
+ h+='<div class="eyebrow" style="margin:16px 0 6px;">Psalm 144 (AMP) · one verse at a time</div>';
+ for(var n=1;n<=15;n++){var pon=!!s.psalm[n];
+   h+='<div style="border-top:1px solid var(--rule);padding:8px 0;display:flex;gap:8px;align-items:flex-start;"><b style="color:'+(pon?"var(--good)":"var(--pine)")+';font-size:12px;flex:0 0 20px;">'+n+'</b>'
+     +'<div class="muted" style="font-size:12.5px;line-height:1.5;flex:1;">'+esc(PSALM144[n-1])+'</div>'
+     +'<button data-toggle-psalm="'+n+'" style="border:0;background:transparent;cursor:pointer;padding:0;flex:0 0 auto;">'+scripPill(pon)+'</button></div>';}
  box.innerHTML=h;
 }
 
@@ -1525,6 +1559,68 @@ function bindKpi(){
 }
 
 /* ---------------- RENDER: WEEK ---------------- */
+/* ---------------- SUNDAY BRAIN DUMP → SORT & PLACE ---------------- */
+var GOAL_FAITH=["daughter","daughters","madi","girls","family","pray","prayer","bible","devotion","church","shabbat","mentor","kid","kids","play","fun","blessing","worship","scripture","god","jesus","faith","date night","home night","husband","son","sister"];
+var GOAL_REVENUE=["revenue","income","asset","mvp","build","launch","course","book","app","vibe","code","sell","client","offer","product","sponsor","funnel","monetize","price","pricing","pitch","sale","sales","envelope","envelopes","curriculum","business","money","invoice","tax","taxes","budget","financial","finance","10x","paid","customer","market","content","video","brand"];
+function parseDumpItems(text){return String(text||"").split(/\n+/).map(function(l){return l.replace(/^[\s•\-\*\u2022\d.\)]+/,"").trim();}).filter(function(l){return l.length>0;});}
+function scoreDumpItem(text){var l=text.toLowerCase();var tier=3;
+ if(GOAL_FAITH.some(function(k){return l.indexOf(k)>=0;}))tier=1;
+ else if(GOAL_REVENUE.some(function(k){return l.indexOf(k)>=0;}))tier=2;
+ var days={sunday:0,sun:0,monday:1,mon:1,tuesday:2,tue:2,tues:2,wednesday:3,wed:3,thursday:4,thu:4,thur:4,thurs:4,friday:5,fri:5,saturday:6,sat:6};
+ var wm=l.match(/\b(sunday|monday|tuesday|wednesday|thursday|friday|saturday|sun|mon|tue|tues|wed|thu|thur|thurs|fri|sat)\b/);
+ var dayIdx=wm?days[wm[1]]:null;
+ var tm=l.match(/\b\d{1,2}(:\d{2})?\s?(am|pm)\b/)||l.match(/\b\d{1,2}:\d{2}\b/);
+ return {text:text,tier:tier,dayIdx:dayIdx,time:tm?tm[0]:null,_used:false};}
+function sortAndPlaceDump(){
+ var mon=weekMon(new Date()),monISO=toISO(mon);
+ var ta=document.getElementById("bdText");
+ var text=(ta&&ta.value&&ta.value.trim())?ta.value:(DB.braindump[monISO]||"");
+ var items=parseDumpItems(text);var sum=document.getElementById("bdSummary");
+ if(!items.length){if(sum){sum.style.display="block";sum.style.color="var(--flag)";sum.textContent="Add a few things to your dump first, then tap Sort & place.";}return;}
+ var scored=items.map(scoreDumpItem);
+ scored.sort(function(a,b){return a.tier-b.tier;});
+ var isos=[];for(var d=0;d<7;d++)isos.push(toISO(addDays(mon,d)));
+ var dated=scored.filter(function(x){return x.dayIdx!==null;});
+ var focus=scored.filter(function(x){return x.dayIdx===null;});
+ var scheduled=0,weekly=0,daily=0,parked=0;
+ // dated -> schedule blocks
+ dated.forEach(function(x){var off=(x.dayIdx===0?6:x.dayIdx-1);addUserEvent(isos[off],(x.time?x.time+" ":"")+x.text);x._used=true;scheduled++;});
+ // weekly Big 3 (top focus items fill empty slots)
+ var wr=weekRec(monISO),wi=0;
+ for(var k=0;k<3;k++){if(!wr[k]||!wr[k].trim()){while(wi<focus.length&&focus[wi]._used)wi++;if(wi<focus.length){wr[k]=focus[wi].text;focus[wi]._used=true;weekly++;wi++;}}}
+ DB.weeks[monISO]=wr;
+ // daily Big 3 — round-robin by slot across the 7 days, fill empty slots only
+ var pending=focus.filter(function(x){return !x._used;}),pi=0;
+ for(var slot=0;slot<3&&pi<pending.length;slot++){for(var di=0;di<7&&pi<pending.length;di++){var rec=dayRec(isos[di]);if(!rec.big3text[slot]||!rec.big3text[slot].trim()){rec.big3text[slot]=pending[pi].text;pending[pi]._used=true;daily++;pi++;}}}
+ // overflow -> parking (nothing missed)
+ if(!DB.parking)DB.parking={};if(!DB.parking[monISO])DB.parking[monISO]=[];
+ pending.filter(function(x){return !x._used;}).forEach(function(x){DB.parking[monISO].push({t:x.text,done:false});parked++;});
+ // clear the raw dump (everything is now placed & visible)
+ DB.braindump[monISO]="";if(ta)ta.value="";
+ save();
+ var total=items.length,placed=scheduled+weekly+daily+parked;
+ if(sum){sum.style.display="block";sum.style.color="var(--pine)";
+   sum.innerHTML='<b style="color:var(--good);">✅ Placed all '+total+' — none missed.</b><br>'
+     +'<span class="muted">🎯 Daily Big 3: <b>'+daily+'</b> · 🗓 Weekly Big 3: <b>'+weekly+'</b> · 📅 Scheduled: <b>'+scheduled+'</b> · 🅿 Later this week: <b>'+parked+'</b></span><br>'
+     +'<span class="muted" style="font-size:11px;">Family &amp; faith sorted first, then revenue &amp; assets. Tweak anything below.</span>';}
+ renderWeek();renderToday();toast();
+}
+function promoteToBig3(text){var mon=weekMon(new Date());for(var d=0;d<7;d++){var iso=toISO(addDays(mon,d));var rec=dayRec(iso);for(var k=0;k<3;k++){if(!rec.big3text[k]||!rec.big3text[k].trim()){rec.big3text[k]=text;return true;}}}return false;}
+function renderParking(){var mon=toISO(weekMon(new Date()));var box=document.getElementById("bdPark"),card=document.getElementById("bdParkCard");if(!box)return;
+ var items=(DB.parking&&DB.parking[mon])||[];var open=items.filter(function(x){return !x.done;});
+ if(card)card.style.display=items.length?"block":"none";
+ var cnt=document.getElementById("bdParkCount");if(cnt)cnt.textContent=open.length+" waiting";
+ box.innerHTML="";
+ items.forEach(function(it,idx){var li=document.createElement("li");li.style.cssText="display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--rule);";
+  var chk=document.createElement("div");chk.style.cssText="flex:0 0 20px;width:20px;height:20px;border:2px solid "+(it.done?"var(--good)":"var(--rule)")+";border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;color:#fff;"+(it.done?"background:var(--good);":"");chk.textContent=it.done?"✓":"";
+  chk.onclick=function(){it.done=!it.done;save();renderParking();};
+  var txt=document.createElement("div");txt.style.cssText="flex:1;font-size:13px;"+(it.done?"color:var(--muted);text-decoration:line-through;":"");txt.textContent=it.t;
+  var pro=document.createElement("button");pro.textContent="→ Big 3";pro.style.cssText="border:1px solid var(--rule);background:#fff;border-radius:7px;font-size:11px;padding:4px 8px;cursor:pointer;color:var(--signal);font-weight:700;flex:0 0 auto;";
+  pro.onclick=function(){if(promoteToBig3(it.t)){DB.parking[mon].splice(idx,1);save();renderWeek();renderToday();toast();}else{if(document.getElementById("bdParkCount"))document.getElementById("bdParkCount").textContent="Big 3 full — check one off first";}};
+  var del=document.createElement("button");del.textContent="✕";del.setAttribute("aria-label","Delete");del.style.cssText="border:0;background:none;color:var(--muted);font-size:14px;cursor:pointer;flex:0 0 auto;padding:0 2px;";
+  del.onclick=function(){DB.parking[mon].splice(idx,1);save();renderParking();};
+  li.appendChild(chk);li.appendChild(txt);li.appendChild(pro);li.appendChild(del);box.appendChild(li);});
+}
 function renderWeek(){
  var mon=weekMon(new Date()),monISO=toISO(mon),wr=weekRec(monISO);
  // Sunday brain dump (per week)
@@ -1870,12 +1966,12 @@ function syncSetDot(state){var d=document.getElementById("syncDot");if(!d)return
 function syncStatusMsg(t){var s=document.getElementById("syStatus");if(s)s.textContent=t;}
 function syMsg(t,c){var m=document.getElementById("syMsg");if(m){m.textContent=t;m.style.color=c||"var(--muted)";}}
 function normalizeDB(){if(!DB||typeof DB!=="object")DB={};
- if(!DB.daily)DB.daily={};if(!DB.workouts)DB.workouts={};if(!DB.strength)DB.strength=[];if(!DB.weeks)DB.weeks={};if(!DB.braindump)DB.braindump={};if(!DB.seeded)DB.seeded={};if(!DB.inbox)DB.inbox=[];if(!DB.userEvents)DB.userEvents={};if(!DB.revenue)DB.revenue=[];if(!DB.customFoods)DB.customFoods=[];if(!DB.scripture)DB.scripture={};if(!DB.meta)DB.meta={};}
+ if(!DB.daily)DB.daily={};if(!DB.workouts)DB.workouts={};if(!DB.strength)DB.strength=[];if(!DB.weeks)DB.weeks={};if(!DB.braindump)DB.braindump={};if(!DB.seeded)DB.seeded={};if(!DB.inbox)DB.inbox=[];if(!DB.userEvents)DB.userEvents={};if(!DB.revenue)DB.revenue=[];if(!DB.customFoods)DB.customFoods=[];if(!DB.scripture)DB.scripture={};if(!DB.parking)DB.parking={};if(!DB.meta)DB.meta={};}
 function hideGate(){var g=document.getElementById("gate");if(g)g.style.display="none";}
 function showGate(){var g=document.getElementById("gate");if(g)g.style.display="flex";}
 function gErr(t){var e=document.getElementById("gErr");if(e)e.textContent=t||"";}
 function hasStoredSession(){try{var r=localStorage.getItem("kate_ff_auth");return !!(r&&r.length>20);}catch(e){return false;}}
-function blankDB(){return {daily:{},workouts:{},strength:[],weeks:{},braindump:{},seeded:{},inbox:[],userEvents:{},revenue:[],customFoods:[],scripture:{},meta:{}};}
+function blankDB(){return {daily:{},workouts:{},strength:[],weeks:{},braindump:{},seeded:{},inbox:[],userEvents:{},revenue:[],customFoods:[],scripture:{},parking:{},meta:{}};}
 function initSync(){
  if(typeof window.supabase==="undefined"||!window.supabase.createClient){
    if(hasStoredSession()){hideGate();syncSetDot("offline");}else{showGate();gErr("Connect to the internet to sign in the first time.");}
@@ -1989,6 +2085,7 @@ document.getElementById("goalEditBtn").onclick=function(){var ed=document.getEle
 document.getElementById("goalSave").onclick=saveGoalEdit;
 document.querySelectorAll('[data-info]').forEach(function(b){b.onclick=function(){var el=document.getElementById(b.getAttribute("data-info"));if(el)el.style.display=(el.style.display==="none"||!el.style.display)?"block":"none";};});
 document.getElementById("logoutBtn2").onclick=doSignOut;
+document.getElementById("bdSortBtn").onclick=sortAndPlaceDump;
 document.querySelectorAll('.msec .mhead').forEach(function(h){h.onclick=function(){h.parentElement.classList.toggle("open");};});
 document.getElementById("fontBtn").onclick=fsCycle;
 document.querySelectorAll('[data-fs]').forEach(function(b){b.onclick=function(){fsSet(+b.getAttribute("data-fs"));};});
@@ -2032,6 +2129,11 @@ document.getElementById("goalAmt").addEventListener("keydown",function(e){if(e.k
 document.getElementById("scripReveal").onclick=scripReveal;
 document.getElementById("scripSolid").onclick=scripMarkSolid;
 document.getElementById("scripDone").onclick=scripDone;
+(function(){var sa=document.getElementById("scripAll");if(sa)sa.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var s=scripRec();
+  if(b.hasAttribute("data-toggle-ref")){var r=b.getAttribute("data-toggle-ref");s.solid[r]=s.solid[r]?0:1;save();renderScrip();}
+  else if(b.hasAttribute("data-toggle-psalm")){var n=+b.getAttribute("data-toggle-psalm");s.psalm[n]=s.psalm[n]?0:1;save();renderScrip();}
+  else if(b.hasAttribute("data-del-verse")){var id=b.getAttribute("data-del-verse");s.custom=(s.custom||[]).filter(function(v){return v.id!==id;});save();renderScrip();}
+  else if(b.id==="nvAdd"){addCustomVerse();}});})();
 document.getElementById("winsBtn").onclick=function(){printScope("wins");};
 document.getElementById("oneMarkBtn").onclick=function(){document.getElementById("oneMarkCoach").style.display="block";};
 document.getElementById("stuckBtn").onclick=function(){var s=document.getElementById("stallCheck");s.style.display=(s.style.display==="none"||!s.style.display)?"block":"none";};
@@ -2040,7 +2142,7 @@ document.getElementById("resetBtn").onclick=function(){var b=this;
  if(!_resetArmed){_resetArmed=true;b.textContent="⚠ Tap again to erase EVERYTHING";b.style.background="var(--flag)";b.style.color="#fff";
    _resetT=setTimeout(function(){_resetArmed=false;b.textContent="Reset all data on this device";b.style.background="";b.style.color="var(--flag)";},4000);return;}
  clearTimeout(_resetT);_resetArmed=false;b.textContent="Reset all data on this device";b.style.background="";b.style.color="var(--flag)";
- DB={daily:{},workouts:{},strength:[],weeks:{},braindump:{},seeded:{},inbox:[],userEvents:{},revenue:[],customFoods:[],scripture:{},meta:{}};applySeeds();metaTouch();saveSilent();renderAll();initMoments();toast();};
+ DB={daily:{},workouts:{},strength:[],weeks:{},braindump:{},seeded:{},inbox:[],userEvents:{},revenue:[],customFoods:[],scripture:{},parking:{},meta:{}};applySeeds();metaTouch();saveSilent();renderAll();initMoments();toast();};
 document.querySelectorAll('[data-print]').forEach(function(b){b.onclick=function(){printScope(b.dataset.print);};});
 document.getElementById("ppClose").onclick=function(){document.getElementById("printPreview").classList.remove("show");};
 document.getElementById("ppPrint").onclick=function(){window.print();};
