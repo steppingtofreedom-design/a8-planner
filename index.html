@@ -16,12 +16,16 @@
 <style>
   :root{
     /* Cloudline palette */
-    --sky:#B9D3F2;--sky-soft:#E3EEFB;--cloud:#F6F6FA;--lav:#C3B4F5;--lav-soft:#ECE6FB;
-    --signal:#3A5BD9;--iris:#5E3FC0;--navy:#10243F;--graphite:#2C2F3A;
-    /* legacy names remapped to Cloudline */
-    --pine:#2C2F3A;--pine-soft:#454C5A;--brass:#3A5BD9;--brass-pale:#ECE6FB;
-    --paper:#E7F0FB;--ink:#2C2F3A;--rule:#D4DCEA;--muted:#5B6473;--flag:#C0384A;
-    --card:#ffffff;--good:#2E7D6B;
+    /* Access 8 Global — palette A (Deep Teal Editorial) */
+    --sky:#9DBEF0;--sky-soft:#E3EEFB;--cloud:#F6F6FA;--lav:#C7EFE9;--lav-soft:#EAF7F4;
+    --signal:#0A7A6E;--iris:#0A7A6E;--navy:#10243F;--graphite:#2C2F3A;
+    /* legacy names remapped to palette A */
+    --pine:#2C2F3A;--pine-soft:#454C5A;--brass:#0A7A6E;--brass-pale:#C7EFE9;
+    --paper:#F5F7FB;--ink:#2C2F3A;--rule:#E1E7F0;--muted:#5B6473;--flag:#E5533C;
+    --card:#ffffff;--good:#1F8A5B;
+    /* palette A accents + neutral ramp */
+    --teal:#0FB5A1;--teal-deep:#0A7A6E;--aqua:#C7EFE9;--amber:#EBA23C;--coral:#FF6F61;--coral-soft:#FFD7CF;
+    --ink2:#0E1B2E;--slate:#33445E;--steel:#5B6473;--mist:#9AA6B8;--line2:#EDF1F7;
     --font-sans:"Plus Jakarta Sans",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
     --font-serif:"Fraunces","Iowan Old Style",Georgia,serif;
     --font-mono:"Space Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -37,7 +41,7 @@
   header{background:var(--navy);color:#fff;padding:max(10px,env(safe-area-inset-top)) 16px 11px;position:sticky;top:0;z-index:20;}
   .hlock{display:flex;align-items:center;justify-content:center;gap:9px;font-family:var(--font-sans);font-weight:800;font-size:19px;color:#fff;letter-spacing:-.005em;}
   .hlock svg{flex:0 0 auto;}
-  .hgreet{margin-top:7px;padding-right:92px;}
+  .hgreet{margin-top:7px;padding-right:52px;}
   header h1{font-family:var(--font-serif);font-weight:600;font-size:20px;color:#fff;line-height:1.15;}
   header .sub{font-size:12px;color:#AEC6E6;margin-top:2px;}
   .wrap{max-width:640px;margin:0 auto;padding:9px 14px 20px;}
@@ -57,6 +61,13 @@
   .b3 li:first-child{border-top:0;}
   .chk{flex:0 0 24px;width:24px;height:24px;border:2px solid var(--pine-soft);border-radius:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:#fff;background:#fff;transition:.15s;margin-top:1px;}
   .chk.on{background:var(--good);border-color:var(--good);}
+  #wlCard .wlday{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:10px 0 4px;}
+  #wlCard .wlrow{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-top:1px solid var(--rule);}
+  #wlCard .wlchk{flex:0 0 auto;color:var(--good);font-weight:700;font-size:13px;line-height:1.3;}
+  #wlCard .wltext{flex:1;font-size:13px;color:var(--muted);text-decoration:line-through;line-height:1.35;}
+  #wlCard .wlsrc{font-size:8.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border:1px solid var(--rule);border-radius:5px;padding:0 4px;margin-left:4px;vertical-align:1px;text-decoration:none;display:inline-block;}
+  #wlCard .wlback{flex:0 0 auto;border:1px solid var(--rule);background:#fff;border-radius:7px;font-size:13px;padding:2px 8px;cursor:pointer;color:var(--signal);font-weight:700;}
+  #wlCard .wlempty{color:var(--muted);font-size:11.5px;font-style:italic;}
   .b3 .txt{flex:1;font-size:14.5px;}
   .b3 li.done .txt{color:var(--muted);text-decoration:line-through;}
 
@@ -137,13 +148,36 @@
   mark{background:var(--brass-pale);color:inherit;padding:0 1px;border-radius:2px;}
   .daynav{border:1px solid var(--rule);background:#fff;color:var(--pine);width:30px;height:30px;border-radius:8px;font-size:18px;line-height:1;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;flex:0 0 auto;padding:0;}
   .daynav:active{background:var(--brass-pale);}
-  #glanceStrip{display:flex;flex-wrap:wrap;gap:7px;}
-  .gchip{display:inline-flex;align-items:center;gap:5px;background:var(--paper);border:1px solid var(--rule);border-radius:20px;padding:4px 11px;font-size:11.5px;color:var(--pine-soft);font-weight:600;line-height:1;}
-  .gchip b{color:var(--pine);font-weight:800;}
-  .gchip.on{background:var(--brass-pale);border-color:var(--brass);color:var(--pine);}
-  .gdots{display:inline-flex;gap:3px;}
-  .gdot{width:8px;height:8px;border-radius:50%;background:var(--rule);}
-  .gdot.on{background:var(--brass);}
+  #glanceStrip{display:flex;gap:6px;}
+  .stat{flex:1;background:#fff;border:1px solid var(--line2);border-radius:12px;padding:8px 3px 7px;text-align:center;}
+  .stat.on{border-color:var(--aqua);background:#F0FBF9;}
+  .ringwrap{position:relative;width:32px;height:32px;margin:0 auto 3px;}
+  .ringwrap .rv{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:var(--navy);}
+  .ringwrap .ck{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+  .statlab{font-size:9.5px;color:var(--steel);font-weight:600;letter-spacing:.01em;}
+  .ringwrap svg circle.prog{transition:stroke-dashoffset .7s cubic-bezier(.4,0,.2,1);}
+  @keyframes ckpop{0%{transform:scale(.4);opacity:0;}60%{transform:scale(1.15);}100%{transform:scale(1);opacity:1;}}
+  .ck svg,.chk.on svg{animation:ckpop .28s ease;}
+  /* North Star hero */
+  #goalCard.nshero{background:linear-gradient(155deg,#173250,#0E2039 72%);border:0;color:#fff;border-radius:16px;box-shadow:0 10px 24px rgba(14,27,46,.22);position:relative;overflow:hidden;}
+  #goalCard.nshero:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;background:var(--teal);opacity:.12;top:-72px;right:-32px;}
+  #goalCard.nshero>*{position:relative;z-index:1;}
+  #goalCard.nshero .eyebrow{color:#7FE3D6;}
+  #goalCard.nshero #goalPctTxt{display:none;}
+  #goalCard.nshero #goalTitle{display:none;}
+  #goalCard.nshero #goalHave{color:#fff !important;font-family:var(--font-serif);font-size:30px;}
+  #goalCard.nshero #goalTgt{color:#A9BBD3;}
+  #goalCard.nshero .between .muted{color:#A9BBD3;}
+  #goalCard.nshero .track{background:rgba(255,255,255,.14);}
+  #goalCard.nshero .track .g{background:var(--teal);}
+  #goalCard.nshero #goalAmt{color:#fff;border-bottom-color:rgba(255,255,255,.3);}
+  #goalCard.nshero .btn{background:var(--teal);color:#052E29;border-color:var(--teal);box-shadow:0 4px 12px rgba(15,181,161,.32);}
+  #goalCard.nshero .btn.ghost{background:transparent;color:#9DB2CE;border-color:rgba(255,255,255,.26);box-shadow:none;}
+  #goalCard.nshero .nsring{position:absolute;top:15px;right:13px;width:60px;height:60px;z-index:2;}
+  #goalCard.nshero .nsring .pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;}
+  #goalCard.nshero .nsmission{font-family:var(--font-serif);font-style:italic;font-size:11.5px;color:#CBD8EA;margin:3px 0 1px;padding-right:66px;}
+  #goalCard.nshero #goalMilestone{display:inline-flex;align-items:center;gap:5px;background:rgba(235,162,60,.15);border:1px solid rgba(235,162,60,.5);color:#F4C77E;border-radius:7px;padding:4px 9px;font-size:10.5px;font-weight:700;margin-top:11px;}
+  #goalCard.nshero .track{border:0;}
   .moment{margin-bottom:12px;}
   .mhead{width:100%;display:flex;align-items:center;gap:10px;background:transparent;border:0;border-bottom:1.5px solid var(--rule);padding:9px 2px;cursor:pointer;font-family:inherit;text-align:left;color:var(--pine);}
   .mchev{flex:0 0 auto;font-size:12px;color:var(--brass);transition:transform .18s ease;transform:rotate(0deg);}
@@ -158,23 +192,26 @@
   .msec .mbody{display:none;padding-top:12px;}
   .msec.open .mbody{display:block;}
   .msec .mbody .card:last-child{margin-bottom:0;}
-  #gate{position:fixed;inset:0;z-index:99999;background:var(--sky);display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden;}
-  #gate:before{content:"";position:absolute;width:70vw;height:70vw;max-width:460px;max-height:460px;border-radius:50%;background:var(--lav);opacity:.55;top:-16vw;right:-18vw;}
-  #gate:after{content:"";position:absolute;width:52vw;height:52vw;max-width:340px;max-height:340px;border-radius:50%;background:var(--sky-soft);opacity:.7;bottom:-14vw;left:-14vw;}
-  #gate .gatebox{position:relative;z-index:1;width:100%;max-width:330px;text-align:center;color:var(--graphite);}
-  #gate .b8m{display:inline-block;margin-bottom:10px;}
-  #gate .gsub{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--iris);margin:0;font-weight:700;}
-  #gate h1{font-family:var(--font-serif);font-size:30px;margin:2px 0 2px;color:var(--graphite);}
-  #gate .gtag{font-family:var(--font-serif);font-style:italic;font-size:15px;color:var(--pine-soft);margin:0 0 22px;}
-  #gate input{width:100%;box-sizing:border-box;border:1px solid #C4D3EC;border-radius:11px;padding:13px 14px;font-size:16px;font-family:inherit;margin-bottom:11px;background:#fff;color:var(--graphite);outline:none;}
-  #gate input:focus{border-color:var(--signal);}
-  #gate #gGo{width:100%;border:0;border-radius:11px;padding:14px;font-size:16px;font-weight:700;font-family:inherit;background:var(--signal);color:#fff;cursor:pointer;margin-top:3px;}
-  #gate #gGo:active{opacity:.88;}
-  #gate #gErr{font-size:12.5px;color:var(--flag);margin-top:12px;min-height:16px;font-weight:600;}
+  #gate{position:fixed;inset:0;z-index:99999;background:linear-gradient(180deg,#12304F 0%,#0B1626 100%);display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden;}
+  #gate:before{content:"";position:absolute;width:62vw;height:62vw;max-width:400px;max-height:400px;border-radius:50%;background:var(--teal);opacity:.08;top:-26vw;left:50%;transform:translateX(-50%);}
+  #gate:after{content:none;}
+  #gate .gmark{margin-bottom:15px;}
+  #gate .gatebox{position:relative;z-index:1;width:100%;max-width:340px;text-align:center;color:#fff;}
+  #gate .glock{display:flex;align-items:center;justify-content:center;gap:9px;font-family:var(--font-sans);font-weight:800;font-size:23px;color:#fff;letter-spacing:-.005em;margin-bottom:9px;}
+  #gate .gsub{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--aqua);margin:0;font-weight:700;}
+  #gate h1{font-family:var(--font-serif);font-size:33px;margin:9px 0 3px;color:#fff;letter-spacing:-.01em;}
+  #gate .gtag{font-family:var(--font-serif);font-style:italic;font-size:14px;color:var(--sky);margin:0;}
+  #gate .ghair{width:46px;height:3px;border-radius:3px;background:var(--teal);margin:16px auto 22px;}
+  #gate input{width:100%;box-sizing:border-box;border:1px solid rgba(255,255,255,.26);border-radius:11px;padding:13px 14px;font-size:16px;font-family:inherit;margin-bottom:11px;background:rgba(255,255,255,.09);color:#fff;outline:none;}
+  #gate input::placeholder{color:#A9B7CC;}
+  #gate input:focus{border-color:var(--teal);background:rgba(255,255,255,.13);}
+  #gate #gGo{width:100%;border:0;border-radius:11px;padding:14px;font-size:16px;font-weight:800;font-family:inherit;background:var(--teal);color:#06322C;cursor:pointer;margin-top:3px;}
+  #gate #gGo:active{opacity:.9;}
+  #gate #gErr{font-size:12.5px;color:#FF9E86;margin-top:12px;min-height:16px;font-weight:600;}
   #gate .gpwrap{position:relative;margin-bottom:11px;}
   #gate .gpwrap #gPass{margin-bottom:0;padding-right:66px;}
-  #gate .gshow{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:transparent;border:0;color:var(--signal);font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.04em;cursor:pointer;padding:8px;}
-  #gate .glink{background:transparent;color:var(--pine-soft);border:0;font-size:13px;text-decoration:underline;padding:11px;margin-top:2px;font-family:inherit;}
+  #gate .gshow{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:transparent;border:0;color:var(--aqua);font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.04em;cursor:pointer;padding:8px;}
+  #gate .glink{background:transparent;color:var(--sky);border:0;font-size:13px;text-decoration:underline;padding:11px;margin-top:2px;font-family:inherit;}
   #capFab{position:fixed;right:14px;bottom:calc(120px + env(safe-area-inset-bottom));width:44px;height:44px;border-radius:50%;background:var(--signal);color:#fff;border:0;font-size:25px;opacity:.94;line-height:1;box-shadow:0 3px 12px rgba(0,0,0,.22);z-index:35;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 3px;}
   #capFab:active{background:var(--pine);}
   #capCard{border-left:4px solid var(--brass);}
@@ -215,7 +252,7 @@
   .foodrow .qty span{min-width:16px;text-align:center;font-weight:700;font-size:14px;color:var(--pine);}
   #printArea{display:none;}
   @media print{
-    header,nav.tabs,.saved,.wrap,#printPreview{display:none!important;}
+    header,nav.tabs,.saved,.wrap,#printPreview,#capFab{display:none!important;}
     #printArea{display:block!important;padding:0;}
     body{background:#fff;padding:0;}
     @page{margin:0.5in;}
@@ -289,10 +326,11 @@
 
 <div id="gate">
   <div class="gatebox">
-    <span class="b8m" aria-hidden="true"><svg viewBox="0 0 40 64" width="44" height="70"><circle cx="20" cy="17" r="12.6" fill="none" stroke="var(--iris)" stroke-width="3.4"/><circle cx="20" cy="45" r="12.6" fill="none" stroke="var(--signal)" stroke-width="3.4"/><circle cx="20" cy="31" r="3.3" fill="var(--navy)"/></svg></span>
+    <div class="gmark" aria-label="Access 8 Global"><svg viewBox="0 0 40 64" width="46" height="74" aria-hidden="true"><circle cx="20" cy="17" r="12.6" fill="none" stroke="#C3B4F5" stroke-width="3.4"/><circle cx="20" cy="45" r="12.6" fill="none" stroke="#9DBEF0" stroke-width="3.4"/><circle cx="20" cy="31" r="3.2" fill="#F6F6FA"/></svg></div>
     <p class="gsub">Access 8 Global</p>
     <h1>A8 Planner</h1>
     <p class="gtag">Human capability for the AI age.</p>
+    <div class="ghair"></div>
     <input id="gName" type="text" autocomplete="given-name" placeholder="First name" style="display:none;">
     <input id="gEmail" type="email" autocomplete="username" autocapitalize="off" placeholder="Email">
     <div class="gpwrap"><input id="gPass" type="password" autocomplete="current-password" placeholder="Password"><button type="button" id="gShow" class="gshow">Show</button></div>
@@ -310,8 +348,8 @@
 <header>
   <div class="hlock" aria-label="Access 8 Global"><span>Access</span><svg class="b8n" viewBox="0 0 40 64" width="20" height="32" aria-hidden="true"><circle cx="20" cy="17" r="12.6" fill="none" stroke="#C3B4F5" stroke-width="3.6"/><circle cx="20" cy="45" r="12.6" fill="none" stroke="#9DBEF0" stroke-width="3.6"/><circle cx="20" cy="31" r="3.2" fill="#F6F6FA"/></svg><span>Global</span></div>
   <div class="hgreet"><h1 id="hTitle">Good morning, Jennifer</h1><div class="sub" id="hSub">—</div></div>
-  <button id="fontBtn" class="searchbtn" style="right:56px;font-weight:800;" aria-label="Text size">A⁺</button>
   <button id="searchBtn" class="searchbtn" aria-label="Search">🔍</button>
+  <button id="fontBtn" class="searchbtn" style="top:calc(max(10px,env(safe-area-inset-top)) + 44px);right:14px;font-weight:800;" aria-label="Text size">A⁺</button>
 </header>
 
 <div class="wrap">
@@ -335,17 +373,22 @@
     <div class="moment" data-moment="morning">
       <button class="mhead"><span class="mchev">▸</span><span class="mlab">☀️ Morning</span><span class="msub">anchor &amp; plan</span></button>
       <div class="mbody">
-        <div class="card" id="goalCard" style="border:1.5px solid var(--brass);">
-          <div class="between"><span class="eyebrow">🎯 #1 Goal · North Star</span><span class="muted" id="goalPctTxt" style="font-size:12px;"></span></div>
+        <div class="card nshero" id="goalCard">
+          <div class="nsring"><span id="goalRing"></span><span class="pct" id="goalPct2"></span></div>
+          <div class="between"><span class="eyebrow">★ #1 Goal · North Star</span><span class="muted" id="goalPctTxt" style="font-size:12px;"></span></div>
           <h3 class="serif" id="goalTitle" style="font-size:16px;color:var(--pine);margin:5px 0 2px;line-height:1.3;">$10,000 into my account — built one MVP at a time, every day.</h3>
+          <div class="nsmission">One MVP at a time — toward homes for rescued children.</div>
           <div class="track" style="margin:9px 0 4px;"><span id="goalBar" class="g" style="width:0;"></span></div>
           <div class="between" style="gap:8px;"><span class="muted" style="font-size:12.5px;"><b id="goalHave" style="color:var(--pine);font-size:15px;">$0</b> of <span id="goalTgt">$10,000</span></span>
             <div class="row" style="gap:6px;flex:0 0 auto;"><input id="goalAmt" type="number" inputmode="numeric" placeholder="+$" style="width:74px;border:0;border-bottom:2px solid var(--rule);font-size:15px;font-family:inherit;padding:4px 0;background:transparent;color:var(--pine);outline:none;"><button id="goalAdd" class="btn small" style="width:auto;">Log</button></div>
           </div>
-          <button id="goalEditBtn" class="btn ghost small" style="width:auto;margin-top:9px;">✎ Edit goal</button>
+          <div id="goalMilestone">◆ Next: land your first sale</div>
+          <button id="goalEditBtn" class="btn ghost small" style="width:auto;margin-top:9px;">Edit goal</button>
           <div id="goalEdit" style="display:none;margin-top:9px;border-top:1px solid var(--rule);padding-top:9px;">
             <input id="goalTitleIn" placeholder="My #1 goal…" style="width:100%;box-sizing:border-box;border:1px solid var(--rule);border-radius:9px;padding:9px;font-size:14px;font-family:inherit;">
             <input id="goalTgtIn" type="number" inputmode="numeric" placeholder="Target amount, e.g. 10000" style="width:100%;box-sizing:border-box;border:1px solid var(--rule);border-radius:9px;padding:9px;font-size:14px;font-family:inherit;margin-top:8px;">
+            <input id="goalMissionIn" placeholder="My mission — the deeper why…" style="width:100%;box-sizing:border-box;border:1px solid var(--rule);border-radius:9px;padding:9px;font-size:14px;font-family:inherit;margin-top:8px;">
+            <input id="goalMilestoneIn" placeholder="Next milestone — e.g. land my first sale" style="width:100%;box-sizing:border-box;border:1px solid var(--rule);border-radius:9px;padding:9px;font-size:14px;font-family:inherit;margin-top:8px;">
             <button id="goalSave" class="btn small" style="width:100%;margin-top:9px;">Save goal</button>
           </div>
           <button class="infobtn" data-info="goalWhy">ⓘ Why this works</button>
@@ -354,7 +397,7 @@
         <div class="card" id="momentumCard" style="border-left:4px solid var(--brass);">
           <div class="between"><span class="eyebrow">Pure Signal · today's one thing</span><button id="stuckBtn" class="btn ghost small" style="width:auto;padding:5px 10px;font-size:12px;">I'm stuck?</button></div>
           <textarea id="pureSignal" rows="1" placeholder="What's the ONE thing to focus on today?" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--rule);font-size:16px;font-family:inherit;padding:6px 0 4px;background:transparent;color:var(--pine);outline:none;margin-top:6px;resize:none;overflow:hidden;line-height:1.45;min-height:30px;"></textarea>
-          <button id="oneMarkBtn" class="btn" style="margin-top:10px;">▷ ONE MARK — just touch it</button>
+          <button id="oneMarkBtn" class="btn ghost" style="margin-top:10px;">▷ Start — just touch it</button>
           <div id="oneMarkCoach" class="muted" style="display:none;margin-top:8px;font-size:12.5px;">One mark — no finish pressure. Work to the peak, then stop &amp; rest. ↻ Begin.</div>
           <div id="stallCheck" style="display:none;margin-top:10px;border-top:1px solid var(--rule);padding-top:8px;">
             <div class="eyebrow" style="margin-bottom:4px;">Find what's stopping you</div>
@@ -376,7 +419,7 @@
             <button id="scripReveal" class="btn ghost small" style="width:auto;">Reveal to check</button>
             <button id="scripSolid" class="btn ghost small" style="width:auto;">Mark solid ✓</button>
           </div>
-          <button id="scripDone" class="btn" style="margin-top:10px;">✓ Did my Scripture memory today</button>
+          <button id="scripDone" class="btn ghost small" style="margin-top:10px;width:auto;">✓ Did my Scripture memory today</button>
           <div class="muted" id="scripStreak" style="font-size:11px;margin-top:8px;"></div>
         </div>
         <div class="card" id="wisdomCard" style="border-left:4px solid var(--pine-soft);">
@@ -511,6 +554,11 @@
       <p class="muted" style="font-size:11.5px;margin:5px 0 8px;">Items that didn’t fit this week — nothing is lost. Check one off, delete it, or push it into your Big 3.</p>
       <ul id="bdPark" style="list-style:none;margin:0;padding:0;"></ul>
     </div>
+    <div class="card" id="wlCard" style="display:none;border-left:4px solid var(--good);">
+      <div class="between"><span class="eyebrow" style="color:var(--good);">✅ Weekly log · done this week</span><span class="muted" id="wlCount" style="font-size:11px;"></span></div>
+      <p class="muted" style="font-size:11.5px;margin:5px 0 8px;">Everything you check off lands here and clears off your active lists. Tap ↩ to move anything back. Feeds your Wins and your JH director brief.</p>
+      <div id="wlBody"></div>
+    </div>
     <div class="card">
       <div class="eyebrow">Weekly Big 3 · this week</div>
       <div class="b3"><ul id="wBig3" style="margin-top:6px;"></ul></div>
@@ -617,6 +665,60 @@
         <button class="btn ghost small" data-fs="2" style="flex:1;">X-Large</button>
       </div>
     </div>
+
+    <style>
+      #jhSec .jhcat{margin-top:12px;border:1px solid var(--rule);border-radius:11px;overflow:hidden;background:#fff;}
+      #jhSec .jhcat-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;background:var(--paper);padding:8px 11px;border-bottom:1px solid var(--rule);}
+      #jhSec .jhcat-n{font-weight:700;color:var(--pine);font-size:12.5px;line-height:1.3;}
+      #jhSec .jhcat-s{font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--iris);font-weight:700;white-space:nowrap;}
+      #jhSec .jhempty{padding:9px 11px;color:var(--muted);font-size:11.5px;font-style:italic;}
+      #jhSec .jhrow{display:flex;align-items:center;gap:8px;padding:8px 10px;border-top:1px solid var(--rule);}
+      #jhSec .jhrow:first-of-type{border-top:0;}
+      #jhSec .jhstat{flex:0 0 auto;border:0;border-radius:20px;color:#fff;font-size:10px;font-weight:700;letter-spacing:.02em;padding:4px 9px;cursor:pointer;font-family:inherit;white-space:nowrap;}
+      #jhSec .jhtext{flex:1;font-size:13px;color:var(--pine);line-height:1.35;}
+      #jhSec .jhsrc{font-size:8.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border:1px solid var(--rule);border-radius:5px;padding:0 4px;margin-left:4px;vertical-align:1px;}
+      #jhSec .jhmove{flex:0 0 auto;max-width:118px;border:1px solid var(--rule);border-radius:7px;padding:4px 5px;font-family:inherit;font-size:11px;color:var(--muted);background:#fff;}
+      #jhSec .jhdel{flex:0 0 auto;border:0;background:transparent;color:var(--muted);font-size:14px;cursor:pointer;padding:2px 4px;line-height:1;}
+      .jhbrief{max-width:7.5in;margin:0 auto;color:var(--pine);font-family:var(--font-sans);}
+      .jhbrief .jhb-head{border-bottom:3px solid var(--navy);padding-bottom:12px;margin-bottom:14px;}
+      .jhbrief .jhb-brand{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;color:var(--iris);font-weight:700;}
+      .jhbrief h1{font-family:var(--font-serif);font-size:30px;color:var(--navy);margin:5px 0 5px;font-weight:600;}
+      .jhbrief .jhb-meta{font-size:12px;color:var(--muted);}
+      .jhbrief .jhb-cat{border:1px solid var(--rule);border-radius:12px;padding:12px 14px;margin-bottom:11px;break-inside:avoid;page-break-inside:avoid;}
+      .jhbrief .jhb-cn{font-family:var(--font-serif);font-size:15px;color:var(--navy);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+      .jhbrief .jhb-cn em{font-style:normal;font-family:var(--font-mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--iris);font-weight:700;}
+      .jhbrief .jhb-num{display:inline-flex;width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--font-serif);font-size:12px;align-items:center;justify-content:center;}
+      .jhbrief .jhb-col{margin:7px 0 0;}
+      .jhbrief .jhb-l{font-family:var(--font-mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:2px;}
+      .jhbrief .jhb-done .jhb-l{color:var(--good);} .jhbrief .jhb-wip .jhb-l{color:var(--brass);} .jhbrief .jhb-plan .jhb-l{color:var(--iris);}
+      .jhbrief .jhb-col ul{margin:0 0 4px;padding-left:18px;} .jhbrief .jhb-col li{font-size:12.5px;margin:2px 0;line-height:1.4;}
+      .jhbrief .jhb-none{color:var(--muted);font-style:italic;font-size:12px;}
+      .jhbrief .jhb-foot{margin-top:14px;text-align:center;font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+      @media print{.jhbrief .jhb-head,.jhbrief .jhb-num{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+    </style>
+    <div class="msec" id="jhSec"><button class="mhead"><span class="mchev">▸</span><span class="mlab">🎓 JH Department Goals</span><span class="msub">weekly director brief</span></button><div class="mbody">
+      <div class="card" style="border-left:4px solid var(--iris);">
+        <div class="between"><span class="eyebrow" style="color:var(--iris);">🎓 JH Department Goals</span><span class="muted" id="jhWk" style="font-size:11px;"></span></div>
+        <p class="muted" style="font-size:12px;margin:6px 0 10px;">Log what you've done and pull items from your Sunday brain dump — everything files under your 6 director-check-in categories. Then generate a clean weekly brief to hand your director.</p>
+        <div class="row" style="gap:8px;flex-wrap:wrap;">
+          <button class="btn" id="jhPullBtn" style="flex:1;min-width:150px;background:var(--iris);border-color:var(--iris);">↺ Pull from this week</button>
+          <button class="btn" id="jhBriefBtn" style="flex:1;min-width:150px;background:var(--brass);border-color:var(--brass);">🖨 Generate director brief</button>
+        </div>
+        <div id="jhPullMsg" class="muted" style="display:none;font-size:11.5px;margin-top:8px;border:1px solid var(--rule);border-radius:8px;padding:8px 10px;line-height:1.5;"></div>
+      </div>
+      <div class="card">
+        <div class="eyebrow">＋ Add an item</div>
+        <textarea id="jhAddText" placeholder="What did you do, or what's planned? e.g. Trained Ashley on Pillar 6 questioning" style="min-height:52px;margin-top:8px;"></textarea>
+        <div class="row" style="gap:8px;margin-top:8px;flex-wrap:wrap;">
+          <select id="jhAddCat" style="flex:2;min-width:170px;border:1px solid var(--rule);border-radius:9px;padding:9px;font-family:inherit;font-size:13px;background:#fff;color:var(--pine);"></select>
+          <select id="jhAddStatus" style="flex:1;min-width:120px;border:1px solid var(--rule);border-radius:9px;padding:9px;font-family:inherit;font-size:13px;background:#fff;color:var(--pine);">
+            <option value="done">Done</option><option value="wip">In progress</option><option value="plan" selected>Planned</option>
+          </select>
+        </div>
+        <button class="btn" id="jhAddBtn" style="margin-top:9px;">Add to my goals</button>
+      </div>
+      <div id="jhBody"></div>
+    </div></div>
 
     <div class="msec"><button class="mhead"><span class="mchev">▸</span><span class="mlab">📖 Your method</span><span class="msub">Pure Signal Card</span></button><div class="mbody">    <div id="system">
     <style>
@@ -773,7 +875,7 @@
       <h2 class="serif">Print a calendar</h2>
       <p class="muted">Each one is fully populated from your school calendar (A/B days, classes, meetings, events) and your Big 3. Tap one to <b>preview it on screen</b>, then tap <b>Print / Save PDF</b> — or screenshot it. (On iPhone you can also use Safari’s Share → Print.)</p>
       <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
-        <button class="btn" data-print="today" style="background:var(--iris);border-color:var(--iris);">🖨 Today — beautiful daily sheet</button>
+        <button class="btn" data-print="today" style="background:var(--iris);border-color:var(--iris);">🖨 Daily sheet</button>
         <button class="btn ghost" data-print="day">Daily — blank grid</button>
         <button class="btn" data-print="week">Weekly — this week</button>
         <button class="btn" data-print="month">Monthly — this month</button>
@@ -1007,9 +1109,19 @@ function renderGoal(){
  var tg=document.getElementById("goalTgt");if(tg)tg.textContent="$"+Number(tgt).toLocaleString();
  var bar=document.getElementById("goalBar");if(bar)bar.style.width=pct+"%";
  var pt=document.getElementById("goalPctTxt");if(pt)pt.textContent=pct+"% there";
+ var rg=document.getElementById("goalRing");if(rg&&typeof ringSVG==="function")rg.innerHTML=ringSVG(t/tgt,'#0FB5A1',60);
+ var p2=document.getElementById("goalPct2");if(p2)p2.textContent=pct+"%";
+ var m=DB.meta||{};
+ var mv=(m.mission&&String(m.mission).trim())?m.mission:(IS_OWNER?"Built one MVP at a time — my daughters rooted and thriving, and homes for rescued children here and abroad.":"Tap “Edit goal” to set your mission.");
+ var ms=document.querySelector("#goalCard .nsmission");if(ms)ms.textContent=mv;
+ var mlv=(m.milestone&&String(m.milestone).trim())?m.milestone:(IS_OWNER?"Next: land your first sale":"");
+ var mil=document.getElementById("goalMilestone");if(mil){if(mlv){mil.textContent="◆ "+mlv;mil.style.display="";}else{mil.style.display="none";}}
 }
 function saveGoalEdit(){var ti=document.getElementById("goalTitleIn").value.trim(),tg=parseFloat(document.getElementById("goalTgtIn").value);
- if(!DB.meta)DB.meta={};DB.meta.goalTitle=ti;if(tg&&tg>0)DB.meta.goalTarget=tg;save();document.getElementById("goalEdit").style.display="none";renderGoal();}
+ var mi=document.getElementById("goalMissionIn"),ml=document.getElementById("goalMilestoneIn");
+ if(!DB.meta)DB.meta={};DB.meta.goalTitle=ti;if(tg&&tg>0)DB.meta.goalTarget=tg;
+ if(mi)DB.meta.mission=mi.value.trim();if(ml)DB.meta.milestone=ml.value.trim();
+ save();document.getElementById("goalEdit").style.display="none";renderGoal();}
 function addRevenue(){var i=document.getElementById("goalAmt");var v=parseFloat(i.value);if(!v||v<=0)return;if(!DB.revenue)DB.revenue=[];DB.revenue.unshift({amt:v,ts:todayISO()});save();i.value="";renderGoal();}
 
 /* ---------------- SEEDED STRATEGIC PLAN (editable defaults, through Q1) ---------------- */
@@ -1094,7 +1206,8 @@ var SCRIP=[
  {ref:"1 Peter 2:24",t:"He personally carried our sins in His body on the cross [willingly offering Himself on it, as on an altar of sacrifice], so that we might die to sin [becoming immune from the penalty and power of sin] and live for righteousness; for by His wounds you [who believe] have been healed."},
  {ref:"Hebrews 4:12",t:"For the word of God is living and active and full of power [making it operative, energizing, and effective]. It is sharper than any two-edged sword, penetrating as far as the division of the soul and spirit [the completeness of a person], and of both joints and marrow [the deepest parts of our nature], exposing and judging the very thoughts and intentions of the heart."},
  {ref:"Psalm 139:1-6",t:"¹ O Lord, you have searched me [thoroughly] and have known me. ² You know when I sit down and when I rise up [my entire life, everything I do]; You understand my thought from afar. ³ You scrutinize my path and my lying down, And You are intimately acquainted with all my ways. ⁴ Even before there is a word on my tongue [still unspoken], Behold, O Lord, You know it all. ⁵ You have enclosed me behind and before, And [You have] placed Your hand upon me. ⁶ Such [infinite] knowledge is too wonderful for me; It is too high [above me], I cannot reach it."},
- {ref:"Ephesians 4:25-28",t:"²⁵ Therefore, rejecting all falsehood [whether lying, defrauding, telling half-truths, spreading rumors, any such as these], speak truth each one with his neighbor, for we are all parts of one another [and we are all parts of the body of Christ]. ²⁶ Be angry [at sin—at immorality, at injustice, at ungodly behavior], yet do not sin; do not let your anger [cause you shame, nor allow it to] last until the sun goes down. ²⁷ And do not give the devil an opportunity [to lead you into sin by holding a grudge, or nurturing anger, or harboring resentment, or cultivating bitterness]. ²⁸ The thief [who has become a believer] must no longer steal, but instead he must work hard [making an honest living], producing that which is good with his own hands, so that he will have something to share with those in need."}
+ {ref:"Ephesians 4:25-28",t:"²⁵ Therefore, rejecting all falsehood [whether lying, defrauding, telling half-truths, spreading rumors, any such as these], speak truth each one with his neighbor, for we are all parts of one another [and we are all parts of the body of Christ]. ²⁶ Be angry [at sin—at immorality, at injustice, at ungodly behavior], yet do not sin; do not let your anger [cause you shame, nor allow it to] last until the sun goes down. ²⁷ And do not give the devil an opportunity [to lead you into sin by holding a grudge, or nurturing anger, or harboring resentment, or cultivating bitterness]. ²⁸ The thief [who has become a believer] must no longer steal, but instead he must work hard [making an honest living], producing that which is good with his own hands, so that he will have something to share with those in need."},
+ {ref:"Ephesians 3:17",t:"so that Christ may dwell in your hearts through your faith. And may you, having been [deeply] rooted and [securely] grounded in love,"}
 ];
 var PSALM144=[
  "Blessed be the Lord, my Rock and my great strength, Who trains my hands for war And my fingers for battle;",
@@ -1436,7 +1549,10 @@ function renderToday(){
    var li=document.createElement("li");if(rec.big3[i])li.className="done";
    li.innerHTML='<div class="chk'+(rec.big3[i]?" on":"")+'">'+(rec.big3[i]?"✓":"")+'</div>';
    var inp=big3Field(rec.big3text[i],"Daily Big 3 #"+(i+1),14.5,function(v){rec.big3text[i]=v;save();});
-   li.querySelector(".chk").onclick=function(){rec.big3[i]=!rec.big3[i];save();renderToday();renderWeek();renderProgress();};
+   li.querySelector(".chk").onclick=function(){rec.big3[i]=!rec.big3[i];
+     if(rec.big3[i]){wlAdd(rec.big3text[i],"big3",{iso:iso,slot:i});}
+     else{wlRemove(function(x){return x.src==="big3"&&x.ref&&x.ref.iso===iso&&x.ref.slot===i;});}
+     save();renderToday();renderWeek();renderProgress();};
    li.appendChild(inp);ul.appendChild(li);autoGrow(inp);
  })(i);}
  setV("k_calories",rec.calories);setV("k_protein",rec.protein);setV("k_water",rec.water);setV("k_steps",rec.steps);setV("k_acsi",rec.acsi);setV("k_notes",rec.notes);
@@ -1450,17 +1566,24 @@ function renderToday(){
  var sc=document.getElementById("shabbatCard");if(sc){var wd=new Date().getDay();sc.style.display=(wd===5||wd===6)?"block":"none";}
  renderGlance(iso,info,rec,isToday);
 }
+function ringSVG(pct,color,size){size=size||32;var r=(size-6)/2;var c=2*Math.PI*r;pct=Math.max(0,Math.min(1,pct));var off=(c*(1-pct)).toFixed(1);var h=size/2;
+ return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'"><circle cx="'+h+'" cy="'+h+'" r="'+r+'" fill="none" stroke="#E7ECF4" stroke-width="4"/><circle class="prog" cx="'+h+'" cy="'+h+'" r="'+r+'" fill="none" stroke="'+color+'" stroke-width="4" stroke-linecap="round" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+off+'" transform="rotate(-90 '+h+' '+h+')"/></svg>';}
+function _ck(color){return '<div class="ck"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="3"><path d="M5 12.5l4.5 4.5L19 6.5"/></svg></div>';}
+function _todo(){return '<div class="ck"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9AA6B8" stroke-width="2.2"><path d="M6 12h12M13 7l5 5-5 5"/></svg></div>';}
+function _tile(inner,lab,on){return '<div class="stat'+(on?" on":"")+'"><div class="ringwrap">'+inner+'</div><div class="statlab">'+lab+'</div></div>';}
 function renderGlance(iso,info,rec,isToday){
  var strip=document.getElementById("glanceStrip");if(!strip)return;
  var done=0;for(var i=0;i<3;i++)if(rec.big3[i])done++;
- var dots='';for(var j=0;j<3;j++)dots+='<span class="gdot'+(rec.big3[j]?" on":"")+'"></span>';
- var chips='<span class="gchip'+(done===3?" on":"")+'"><span class="gdots">'+dots+'</span> Big 3</span>';
- chips+='<span class="gchip'+(rec.prayer?" on":"")+'">'+(rec.prayer?"✓":"○")+' Prayer</span>';
- var sc=DB.scripture||{},sd=(sc.last===todayISO());
- chips+='<span class="gchip'+(sd?" on":"")+'">'+(sd?"✓":"○")+' Scripture</span>';
- chips+='<span class="gchip'+(rec.workout?" on":"")+'">'+(rec.workout?"✓":"○")+' Move</span>';
- var have=revTotal();chips+='<span class="gchip'+(have>0?" on":"")+'">💵 <b>$'+have.toLocaleString()+'</b></span>';
- strip.innerHTML=chips;
+ var s=DB.scripture||{},sd=(s.last===todayISO());
+ var solid=0;if(s.solid)Object.keys(s.solid).forEach(function(k){if(s.solid[k])solid++;});
+ var have=revTotal(),tgt=goalTarget(),gpct=tgt>0?have/tgt:0;
+ var h='';
+ h+=_tile(ringSVG(done/3,'#0FB5A1')+'<div class="rv">'+done+'/3</div>','Big 3',done===3);
+ h+=_tile(rec.prayer?_ck('#0FB5A1'):_todo(),'Prayer',!!rec.prayer);
+ h+=_tile(sd?_ck('#0FB5A1'):(ringSVG(solid/7,'#0FB5A1')+'<div class="rv" style="font-size:9px;">'+solid+'/7</div>'),'Scripture',sd);
+ h+=_tile(rec.workout?_ck('#0FB5A1'):_todo(),'Move',!!rec.workout);
+ h+=_tile(ringSVG(gpct,'#EBA23C')+'<div class="rv" style="font-size:8.5px;">'+Math.round(gpct*100)+'%</div>','$10k',have>0);
+ strip.innerHTML=h;
 }
 var MOMENTS=["morning","focus","track","evening"];
 function momentDefault(){var h=new Date().getHours();return h<12?"morning":h<17?"focus":h<20?"track":"evening";}
@@ -1518,7 +1641,7 @@ function renderInbox(){
  items.forEach(function(it,idx){
    var li=document.createElement("li");li.className="capitem"+(it.done?" done":"");
    var chk=document.createElement("div");chk.className="cchk"+(it.done?" on":"");chk.textContent=it.done?"✓":"";
-   chk.onclick=function(){it.done=!it.done;save();renderInbox();};
+   chk.onclick=function(){wlAdd(it.t,"todo",{});DB.inbox.splice(idx,1);save();renderInbox();renderWeek();toastMsg("Logged ✓");};
    var mid=document.createElement("div");mid.style.cssText="flex:1;min-width:0;";
    var ds=it.ts?fromISO(it.ts).toLocaleDateString(undefined,{month:"short",day:"numeric"}):"";
    var txt=document.createElement("div");txt.className="ctext";txt.innerHTML=(ds?'<span class="cdate">'+ds+'</span>':'')+esc(it.t);
@@ -1606,6 +1729,33 @@ function sortAndPlaceDump(){
  renderWeek();renderToday();toast();
 }
 function promoteToBig3(text){var mon=weekMon(new Date());for(var d=0;d<7;d++){var iso=toISO(addDays(mon,d));var rec=dayRec(iso);for(var k=0;k<3;k++){if(!rec.big3text[k]||!rec.big3text[k].trim()){rec.big3text[k]=text;return true;}}}return false;}
+/* ---------------- WEEKLY LOG (completed → log, one-click restore) ---------------- */
+function wlEnsure(){if(!DB.weeklog||typeof DB.weeklog!=="object")DB.weeklog={};if(!Array.isArray(DB.weeklog.items))DB.weeklog.items=[];return DB.weeklog;}
+function wlId(){return "l"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+function wlWeekISO(){return toISO(weekMon(new Date()));}
+function wlSameRef(a,b){a=a||{};b=b||{};return a.iso===b.iso&&a.slot===b.slot;}
+function wlAdd(text,src,ref){text=String(text||"").trim();if(!text)return;var w=wlEnsure();
+ if(w.items.some(function(x){return x.src===src&&x.text===text&&wlSameRef(x.ref,ref)&&x.week===wlWeekISO();}))return;
+ w.items.push({id:wlId(),text:text,src:src,ref:ref||{},doneDate:todayISO(),week:wlWeekISO(),ts:Date.now()});}
+function wlRemove(pred){var w=wlEnsure();w.items=w.items.filter(function(x){return !pred(x);});}
+function wlRestore(id){var w=wlEnsure();var it=w.items.filter(function(x){return x.id===id;})[0];if(!it)return;
+ if(it.src==="big3"){var rec=dayRec(it.ref.iso);if(!rec.big3text[it.ref.slot]||!rec.big3text[it.ref.slot].trim())rec.big3text[it.ref.slot]=it.text;rec.big3[it.ref.slot]=false;}
+ else if(it.src==="weekly"){var mon=wlWeekISO(),wr=weekRec(mon);for(var k=0;k<3;k++){if(!wr[k]||!wr[k].trim()){wr[k]=it.text;break;}}DB.weeks[mon]=wr;}
+ else if(it.src==="todo"){if(!DB.inbox)DB.inbox=[];DB.inbox.unshift({t:it.text,done:false,ts:todayISO()});}
+ else if(it.src==="park"){var m=wlWeekISO();if(!DB.parking)DB.parking={};if(!DB.parking[m])DB.parking[m]=[];DB.parking[m].push({t:it.text,done:false});}
+ wlRemove(function(x){return x.id===id;});save();renderAll();toastMsg("Moved back to your list ↩");}
+var WL_SRC={big3:"Daily Big 3",weekly:"Priority",todo:"To-do",park:"Later"};
+function renderWeeklog(){var box=document.getElementById("wlBody"),card=document.getElementById("wlCard");if(!box)return;var w=wlEnsure();
+ var mon=wlWeekISO();var items=w.items.filter(function(x){return x.week===mon;});
+ if(card)card.style.display="block";
+ var cnt=document.getElementById("wlCount");if(cnt)cnt.textContent=items.length?(items.length+" done this week"):"nothing yet";
+ if(!items.length){box.innerHTML='<div class="wlempty">Nothing logged yet. Check off a Daily Big 3, a priority, or a to-do and it lands here — then rolls off your active lists.</div>';return;}
+ items.sort(function(a,b){return b.ts-a.ts;});
+ var html="",lastDay="";
+ items.forEach(function(it){var day=fromISO(it.doneDate).toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"});
+   if(day!==lastDay){html+='<div class="wlday">'+day+'</div>';lastDay=day;}
+   html+='<div class="wlrow"><span class="wlchk">✓</span><span class="wltext">'+esc(it.text)+' <span class="wlsrc">'+(WL_SRC[it.src]||"")+'</span></span><button class="wlback" data-wl="'+it.id+'" title="Move back to my list">↩</button></div>';});
+ box.innerHTML=html;}
 function renderParking(){var mon=toISO(weekMon(new Date()));var box=document.getElementById("bdPark"),card=document.getElementById("bdParkCard");if(!box)return;
  var items=(DB.parking&&DB.parking[mon])||[];var open=items.filter(function(x){return !x.done;});
  if(card)card.style.display=items.length?"block":"none";
@@ -1613,7 +1763,7 @@ function renderParking(){var mon=toISO(weekMon(new Date()));var box=document.get
  box.innerHTML="";
  items.forEach(function(it,idx){var li=document.createElement("li");li.style.cssText="display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--rule);";
   var chk=document.createElement("div");chk.style.cssText="flex:0 0 20px;width:20px;height:20px;border:2px solid "+(it.done?"var(--good)":"var(--rule)")+";border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;color:#fff;"+(it.done?"background:var(--good);":"");chk.textContent=it.done?"✓":"";
-  chk.onclick=function(){it.done=!it.done;save();renderParking();};
+  chk.onclick=function(){wlAdd(it.t,"park",{});DB.parking[mon].splice(idx,1);save();renderParking();renderWeeklog();toastMsg("Logged ✓");};
   var txt=document.createElement("div");txt.style.cssText="flex:1;font-size:13px;"+(it.done?"color:var(--muted);text-decoration:line-through;":"");txt.textContent=it.t;
   var pro=document.createElement("button");pro.textContent="→ Big 3";pro.style.cssText="border:1px solid var(--rule);background:#fff;border-radius:7px;font-size:11px;padding:4px 8px;cursor:pointer;color:var(--signal);font-weight:700;flex:0 0 auto;";
   pro.onclick=function(){if(promoteToBig3(it.t)){DB.parking[mon].splice(idx,1);save();renderWeek();renderToday();toast();}else{if(document.getElementById("bdParkCount"))document.getElementById("bdParkCount").textContent="Big 3 full — check one off first";}};
@@ -1636,8 +1786,12 @@ function renderWeek(){
  var wb=document.getElementById("wBig3");wb.innerHTML="";
  for(var i=0;i<3;i++){(function(i){
    var li=document.createElement("li");li.style.cssText="display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule);list-style:none;";
+   var chk=document.createElement("div");chk.className="chk";chk.style.cssText="flex:0 0 20px;width:20px;height:20px;font-size:12px;margin-top:1px;";chk.title="Mark done → Weekly log";
+   chk.onclick=function(){var t=(wr[i]||"").trim();if(!t)return;wlAdd(t,"weekly",{slot:i});wr[i]="";DB.weeks[monISO]=wr;save();renderWeek();renderToday();toastMsg("Logged ✓");};
    var inp=big3Field(wr[i],"Weekly Big 3 #"+(i+1),14,function(v){wr[i]=v;DB.weeks[monISO]=wr;save();});
-   li.innerHTML='<span style="color:var(--brass);font-weight:700;flex:0 0 14px;font-family:Georgia,serif;padding-top:2px;">'+(i+1)+'</span>';
+   li.appendChild(chk);
+   var num=document.createElement("span");num.style.cssText="color:var(--brass);font-weight:700;flex:0 0 14px;font-family:Georgia,serif;padding-top:2px;";num.textContent=(i+1);
+   li.appendChild(num);
    li.appendChild(inp);wb.appendChild(li);autoGrow(inp);
  })(i);}
  var g=document.getElementById("wGrid");g.innerHTML="";var ti=todayISO();
@@ -1648,6 +1802,7 @@ function renderWeek(){
    el.innerHTML='<div class="dh"><span class="dn">'+info.wdName.slice(0,3)+" "+dt.getDate()+'</span><span class="dt">'+info.badge+'</span></div><div class="dl">'+classSummary(info)+' · '+done+'/3</div>';
    el.onclick=function(){showDayDetail(dt);};g.appendChild(el);
  })(j);}
+ renderParking();renderWeeklog();
 }
 function showDayDetail(dt){var info=dayInfo(dt);
  document.getElementById("wDayDetail").style.display="block";
@@ -1955,7 +2110,180 @@ function printScope(scope){var d=new Date();
 function show(v){document.querySelectorAll(".view").forEach(function(s){s.classList.toggle("active",s.id===v);});
  document.querySelectorAll("nav.tabs button").forEach(function(b){b.classList.toggle("on",b.dataset.v===v);});
  if(v==="today"){viewISO=null;renderToday();}if(v==="progress")renderProgress();if(v==="train")renderTrain();if(v==="week")renderWeek();window.scrollTo(0,0);}
-function renderAll(){renderToday();renderWeek();renderProgress();}
+function renderAll(){renderToday();renderWeek();renderProgress();renderJH();}
+
+/* ---------------- JH DEPARTMENT GOALS ---------------- */
+var JH_CATS=[
+ {k:1,name:"JH faculty meetings & liaison",sub:"Ashley & Drea",kw:["faculty meeting","faculty","liaison","staff meeting","staff","department meeting","team update","communicate to team","one-on-one","check-in with"]},
+ {k:2,name:"7-Pillar BEI tool — integrate & train",sub:"into class lessons",kw:["bei","pillar","pillars","integration tool","integrate","biblical integration","train","class lesson","curriculum","shawn"]},
+ {k:3,name:"Develop Drea & Ashley's pedagogy",sub:"periodic observation",kw:["pedagogy","observation","observe","coaching","coach","feedback","walkthrough","develop teacher","evaluate teaching"]},
+ {k:4,name:"Vision-cast new JH classes / programs",sub:"what's next",kw:["vision","vision cast","new class","new program","new course","launch","program","elective","pilot","curriculum idea","class idea"]},
+ {k:5,name:"Wins · Losses · Blockings",sub:"this week",kw:["win","won","loss","lost","blocking","blocked","blocker","stuck","obstacle","celebrate","struggle"]},
+ {k:6,name:"Comms skills in classes",sub:"student communication",kw:["comms","communication","public speaking","speaking","presentation","present","student voice","debate","discussion"]}
+];
+var JH_STAT={done:{lab:"Done",c:"var(--good)"},wip:{lab:"In progress",c:"var(--brass)"},plan:{lab:"Planned",c:"var(--iris)"}};
+function jhEnsure(){if(!DB.jhGoals||typeof DB.jhGoals!=="object")DB.jhGoals={};if(!Array.isArray(DB.jhGoals.items))DB.jhGoals.items=[];if(!DB.jhGoals.meta||typeof DB.jhGoals.meta!=="object")DB.jhGoals.meta={};if(!DB.jhGoals.meta.pulled)DB.jhGoals.meta.pulled={};return DB.jhGoals;}
+function jhId(){return "j"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+function jhCatFor(text){var l=String(text||"").toLowerCase();var best=0,bestScore=0;
+ JH_CATS.forEach(function(c){var s=0;c.kw.forEach(function(k){if(l.indexOf(k)>=0)s+=(k.indexOf(" ")>=0?2:1);});if(s>bestScore){bestScore=s;best=c.k;}});
+ return best;}
+function jhAdd(text,cat,status,source){text=String(text||"").trim();if(!text)return null;var g=jhEnsure();
+ var it={id:jhId(),cat:cat||0,text:text,status:status||"plan",source:source||"manual",ts:Date.now(),week:toISO(weekMon(new Date()))};
+ g.items.push(it);return it;}
+function jhStatCycle(s){return s==="plan"?"wip":s==="wip"?"done":"plan";}
+function jhPullWeek(){var g=jhEnsure();var mon=weekMon(new Date()),monISO=toISO(mon);var added=0;
+ for(var d=0;d<7;d++){var iso=toISO(addDays(mon,d));var rec=DB.daily[iso];if(!rec||!rec.big3||!rec.big3text)continue;
+   for(var i=0;i<3;i++){if(rec.big3[i]&&rec.big3text[i]&&rec.big3text[i].trim()){var t=rec.big3text[i].trim();var c=jhCatFor(t);var key="big3|"+iso+"|"+i+"|"+t;
+     if(c&&!g.meta.pulled[key]){jhAdd(t,c,"done","auto");g.meta.pulled[key]=1;added++;}}}}
+ var dump=parseDumpItems(DB.braindump&&DB.braindump[monISO]);
+ dump.forEach(function(t){var c=jhCatFor(t);var key="dump|"+monISO+"|"+t;if(c&&!g.meta.pulled[key]){jhAdd(t,c,"plan","auto");g.meta.pulled[key]=1;added++;}});
+ var park=(DB.parking&&DB.parking[monISO])||[];park.forEach(function(p){var t=((p&&p.t)||"").trim();if(!t)return;var c=jhCatFor(t);var key="park|"+monISO+"|"+t;if(c&&!g.meta.pulled[key]){jhAdd(t,c,"plan","auto");g.meta.pulled[key]=1;added++;}});
+ // Weekly Log completions (priority / to-do / later) → Done in the brief (JH-relevant only)
+ var wl=(DB.weeklog&&DB.weeklog.items)||[];wl.forEach(function(x){if(x.week!==monISO||x.src==="big3")return;var t=(x.text||"").trim();if(!t)return;var c=jhCatFor(t);var key="wl|"+x.id;if(c&&!g.meta.pulled[key]){jhAdd(t,c,"done","auto");g.meta.pulled[key]=1;added++;}});
+ save();renderJH();
+ var s=document.getElementById("jhPullMsg");if(s){s.style.display="block";s.style.color=added?"var(--good)":"var(--muted)";
+   s.textContent=added?("✓ Pulled "+added+" item"+(added>1?"s":"")+" from this week — recategorize any below, then generate your brief."):"You're all caught up — nothing new to pull from this week's brain dump or completed Big 3.";}}
+function jhCatOpts(sel,withAuto){var o=withAuto?'<option value="auto"'+((sel===undefined)?" selected":"")+'>Auto (file by keyword)</option>':'<option value="0"'+(sel==0?" selected":"")+'>— category —</option>';
+ JH_CATS.forEach(function(c){o+='<option value="'+c.k+'"'+(sel==c.k?" selected":"")+'>'+c.k+' · '+esc(c.name)+'</option>';});return o;}
+function jhFillAddCat(){var s=document.getElementById("jhAddCat");if(s&&!s.getAttribute("data-filled")){s.innerHTML=jhCatOpts(undefined,true);s.setAttribute("data-filled","1");}}
+function renderJH(){var box=document.getElementById("jhBody");if(!box)return;var g=jhEnsure();jhFillAddCat();
+ var wk=document.getElementById("jhWk");if(wk){var mon=weekMon(new Date()),fri=addDays(mon,4);
+   wk.textContent="Week of "+mon.toLocaleDateString(undefined,{month:"short",day:"numeric"})+" – "+fri.toLocaleDateString(undefined,{month:"short",day:"numeric"});}
+ var groups={0:[]};JH_CATS.forEach(function(c){groups[c.k]=[];});
+ g.items.forEach(function(it){(groups[it.cat]!==undefined?groups[it.cat]:groups[0]).push(it);});
+ var order=JH_CATS.map(function(c){return c.k;}).concat([0]);var html="";
+ order.forEach(function(ck){var cat=ck?JH_CATS.filter(function(c){return c.k===ck;})[0]:{k:0,name:"Uncategorized — assign a category",sub:""};
+   var arr=groups[ck]||[];if(ck===0&&arr.length===0)return;
+   html+='<div class="jhcat"><div class="jhcat-h"><span class="jhcat-n">'+(ck?ck+' · ':'')+esc(cat.name)+'</span>'+(cat.sub?'<span class="jhcat-s">'+esc(cat.sub)+'</span>':'')+'</div>';
+   if(!arr.length){html+='<div class="jhempty">Nothing logged yet.</div>';}
+   else{arr.sort(function(a,b){return b.ts-a.ts;});
+     arr.forEach(function(it){var st=JH_STAT[it.status]||JH_STAT.plan;
+       html+='<div class="jhrow" data-id="'+it.id+'"><button class="jhstat" data-act="cycle" style="background:'+st.c+';">'+st.lab+'</button>'+
+         '<span class="jhtext">'+esc(it.text)+(it.source==="auto"?' <span class="jhsrc">auto</span>':'')+'</span>'+
+         '<select class="jhmove" data-act="move" title="Move to category">'+jhCatOpts(it.cat,false)+'</select>'+
+         '<button class="jhdel" data-act="del" title="Remove">✕</button></div>';});}
+   html+='</div>';});
+ box.innerHTML=html;}
+function jhBrief(){var mon=weekMon(new Date()),monISO=toISO(mon),fri=addDays(mon,4);var g=jhEnsure();
+ var wkItems=g.items.filter(function(it){return it.week===monISO;});
+ var html=buildJHBrief(mon,fri,wkItems.length?wkItems:g.items);
+ document.getElementById("printArea").innerHTML=html;document.getElementById("ppBody").innerHTML=html;
+ document.getElementById("ppTitle").textContent="JH Department — Weekly Brief";
+ var ov=document.getElementById("printPreview");ov.classList.add("show");ov.scrollTop=0;}
+function jhbCol(label,arr,cls){if(!arr.length)return "";var h='<div class="jhb-col jhb-'+cls+'"><div class="jhb-l">'+label+'</div><ul>';arr.forEach(function(it){h+='<li>'+esc(it.text)+'</li>';});return h+'</ul></div>';}
+function buildJHBrief(mon,fri,items){
+ var range=mon.toLocaleDateString(undefined,{month:"long",day:"numeric"})+" – "+fri.toLocaleDateString(undefined,{month:"long",day:"numeric",year:"numeric"});
+ var who=(DB.meta&&DB.meta.name)?DB.meta.name:(IS_OWNER?"Jennifer":"me");
+ var h='<div class="jhbrief"><div class="jhb-head"><div class="jhb-brand">ACCESS 8 GLOBAL · JH DEPARTMENT</div><h1>Weekly Brief</h1>'+
+   '<div class="jhb-meta">Week of '+range+' &nbsp;·&nbsp; Prepared by '+esc(who)+' &nbsp;·&nbsp; Director check-in</div></div>';
+ JH_CATS.forEach(function(c){var mine=items.filter(function(it){return it.cat===c.k;});
+   var done=mine.filter(function(x){return x.status==="done";}),wip=mine.filter(function(x){return x.status==="wip";}),plan=mine.filter(function(x){return x.status==="plan";});
+   h+='<div class="jhb-cat"><div class="jhb-cn"><span class="jhb-num">'+c.k+'</span>'+esc(c.name)+(c.sub?' <em>'+esc(c.sub)+'</em>':'')+'</div>';
+   h+=jhbCol("Done this week",done,"done")+jhbCol("In progress",wip,"wip")+jhbCol("Planned next",plan,"plan");
+   if(!mine.length)h+='<div class="jhb-none">— nothing logged this week —</div>';
+   h+='</div>';});
+ var unc=items.filter(function(it){return !it.cat;});
+ if(unc.length){h+='<div class="jhb-cat"><div class="jhb-cn"><span class="jhb-num">•</span>Other notes</div>'+jhbCol("Items",unc,"plan")+'</div>';}
+ return h+'<div class="jhb-foot">Access 8 Global · Human capability for the AI age · Faith-Filled · Innovation-Driven · Future-Ready</div></div>';}
+function applyOneTimePreloads(){if(!DB.meta)DB.meta={};if(DB.meta.pre_bei_0831)return;if(!DB.inbox)DB.inbox=[];
+ ["Fix BEI Integration tool for teachers & student instructors","Send Shawn an update on Biblical integration in BEI"].forEach(function(t){
+   if(!DB.inbox.some(function(x){return x.t===t;}))DB.inbox.unshift({t:t,done:false,ts:todayISO()});});
+ DB.meta.pre_bei_0831=1;saveSilent();if(typeof renderInbox==="function")renderInbox();}
+function applyThuPreload(){if(!DB.meta)DB.meta={};if(DB.meta.pre_thu_v1)return;if(!DB.inbox)DB.inbox=[];
+ ["★ Build SUI parents deck — 10-min talk for BTSN (Thu 9/3)","Learn to run Teams + post student build guides for this term (before Thu)"].forEach(function(t){
+   if(!DB.inbox.some(function(x){return x.t===t;}))DB.inbox.unshift({t:t,done:false,ts:todayISO()});});
+ if(!DB.userEvents)DB.userEvents={};var wed="2026-09-02";if(!DB.userEvents[wed])DB.userEvents[wed]=[];
+ ["8:30 Teams — learn + post student build guides (before Thu)","1:00 Build SUI parents deck (10 min · BTSN Thu)"].forEach(function(ev){var tag="✎ "+ev;if(DB.userEvents[wed].indexOf(tag)<0)DB.userEvents[wed].push(tag);});
+ DB.meta.pre_thu_v1=1;saveSilent();if(typeof renderInbox==="function")renderInbox();}
+
+/* ---------------- INSTALL THIS WEEK'S PLAN (Aug 31 – Sep 6) ---------------- */
+/* v1 install values — used only to detect an unedited prior install so v2 can replace it. */
+var PLAN_V1={
+ weekly:["Ship the deadline deliverables — Biblical Integration tool → Shawn (Mon, top); 21 Envelopes drafts by Thu; Justice Tax signed this week","Run JH with clear systems — Called to Create club live + Shari; syllabus signed home; supplies/journals ordered; Ashley & Drea check-ins","Advance the top revenue goal — find platforms to sell your curriculum/courses and re-brand under your own IP (Wed/Fri/Sun blocks)"],
+ big3:{
+  "2026-08-31":["★ Biblical Integration tool → Shawn (fixed + JH/SI HS examples)","SUI content — map the next few months (45-min top-priority block)","Called to Create club live + email Shari; supplies/journals; call Drea"],
+  "2026-09-01":["Teach B day (1B/2B JH · 3B Café Prep · 4B SUI)","★ JH syllabus finalized → sent home for parent signatures","JH Meeting 2:30–4:00; workout (lower + jumps)"],
+  "2026-09-02":["EE scope & sequence — upscale slides via Gamma","★ TOP revenue — curriculum-selling platforms + IP re-brand plan","Mom's card + gift OUT today (birthday 9/9); Wed mentee check-in"],
+  "2026-09-03":["Teach B day (standard bell)","★ 21 Envelopes drafts COMPLETE (due) + Graciela's card","AI Session 2 co-teach 2:30–4:45; HS Back-to-School Night 6–8:30"],
+  "2026-09-04":["★ ACSI finished & submitted → email point person","Justice Tax financing signed; 21 Envelopes + publish plan","🎂 Graciela's birthday (confirm 4–5) → protect; close into Shabbat"],
+  "2026-09-05":["Rest · worship · family","Restorative workout (2:00) · Holly's bath","Saturday reflection — wins, misses, one fix"],
+  "2026-09-06":["Weekly planning — build Sep 7–13 (Mon = Labor Day)","Strategic build: social catch-up video + AI inbox agent + IP plan","Plan Madi's every-other-Friday worship nights (start 9/11) + family calls"]},
+ events:{
+  "2026-08-31":["12:45 Zoom/call with Drea — mgmt + questioning strategies","1:15 SUI content — next few months (45 min)"],
+  "2026-09-01":["10:55 Finalize syllabus → send home (prep block)"],
+  "2026-09-02":["3:00 Mom's birthday card + gift OUT (mail today)","11:30 Email Ben — AI Foundations 30-min build idea"],
+  "2026-09-03":["11:30 21 Envelopes — finish drafts (prep block)","6:00 HS Back-to-School Night"],
+  "2026-09-04":["11:15 Justice Tax — accept financing + sign","4:00 Graciela's birthday — celebrate"],
+  "2026-09-05":[],
+  "2026-09-06":["Handyman — request quote (door, toilet valve, fence, windows, fireplace, tan bark, water filter)"]}
+};
+var PLAN_SEP={
+ mon:"2026-08-31",
+ weekly:[
+  "★ INCOME NORTH STAR — one existing course → your IP → listed → first sale (a real MVP toward $10k)",
+  "Ship the deadline deliverables, contained — Tool → Shawn (Mon); 21 Envelopes drafts by Thu; Justice Tax signed",
+  "Run JH lean — delegate to Ashley & Drea, reuse templates, protect the daily income block"],
+ days:{
+  "2026-08-31":{signal:"Income goes FIRST — before the tool, before the job. Choose the flagship course and name your brand. Fear wants you to postpone this; don't.",
+    big3:["★ INCOME (8:30, first): choose the ONE flagship course to sell + name your brand/IP","Biblical Integration tool → Shawn (fixed + examples) — done by late morning","SUI content map (45m) · Called to Create + Shari · call Drea"],
+    events:["8:30 ★ INCOME — pick flagship course + name your brand","12:45 Zoom/call with Drea","1:15 SUI content map (45m)"]},
+  "2026-09-01":{signal:"Teaching is locked (1B & 2B solid + 4B); 3B is your only work block. The platform pick is a 15-min decision, not a research hole.",
+    big3:["★ INCOME (15m, lunch): decide the selling platform — pick one, don't research","Teach B day — 1B & 2B solid, 4B; 3B open (your only work block)","3B: JH syllabus finalized → sent home · JH Meeting 2:30"],
+    events:["11:05 3B OPEN — syllabus → send home","12:10 ★ INCOME (15m) — pick the selling platform"]},
+  "2026-09-02":{signal:"Your best A-day block builds the product, not the job. Package v1 and ship it — don't perfect it.",
+    big3:["★ INCOME (8:30, fresh): package flagship v1 — export, brand it, write the sales copy","EE scope/Gamma (one unit) · email Ben (AI Foundations build)","Mom's card + gift OUT today (9/9) · Wed mentee check-in"],
+    events:["8:30 ★ INCOME — package flagship v1","3:00 Mom's card + gift OUT (mail today)"]},
+  "2026-09-03":{signal:"Brutal day — income is one light 15-min touch (seller account). The arc survives a small day.",
+    big3:["★ INCOME (15m, 3B or eve): create the seller account + upload the product file","Teach B day — 1B & 2B solid, 4B; 3B open. 21 Envelopes drafts DUE (in 3B)","AI co-teach 2:30–4:45 · HS Back-to-School Night 6–8:30"],
+    events:["11:45 3B OPEN — 21 Envelopes FINISH (due)","6:00 HS Back-to-School Night"]},
+  "2026-09-04":{signal:"Listing it live is the week's bravest 45 minutes. Do it first, then ACSI and the tax.",
+    big3:["★ INCOME (8:30, fresh): LIST IT LIVE — set the price + write the launch note","ACSI finished & submitted · Justice Tax financing signed","🎂 Graciela's birthday (4–5) → protect; close into Shabbat"],
+    events:["8:30 ★ INCOME — LIST IT LIVE (price + launch note)","10:45 Justice Tax — sign","4:00 Graciela's birthday"]},
+  "2026-09-05":{signal:"Shabbat — rest & worship. No work.",
+    big3:["Rest & worship — no work","Restorative workout (2:00) · Holly's bath","Saturday reflection — wins, misses, one fix"],
+    events:[]},
+  "2026-09-06":{signal:"Send the launch and ask for the sale. The first sale is the MVP that proves it — repeatable next week.",
+    big3:["★ INCOME: soft-launch to a warm list → first sale + record the social catch-up video","Weekly planning — build Sep 7–13 (Mon = Labor Day)","Plan Madi's every-other-Friday worship nights (start 9/11) + family calls"],
+    events:["3:40 ★ INCOME — launch → first sale + catch-up video","Handyman — request quote (door, valve, fence, windows, fireplace, tan bark, filter)"]}},
+ dump:"THIS WEEK'S DUMP (Aug 31 – Sep 6) — already sorted into your Big 3, schedule & Department Goals. Kept here so nothing is missed.\n\n★ INCOME NORTH STAR (the ONE thing — gets your first, freshest block daily)\n• Take a course you ALREADY built → re-brand as my IP → list it on a platform → first sale\n• Mon: choose flagship course + brand · Tue: pick platform · Wed: package v1 · Thu: seller account · Fri: LIST LIVE · Sun: launch → first sale + catch-up video\n\n⛑ DEADLINES (contained)\n• Biblical Integration tool — fix + gather JH & SI HS examples → send Shawn (Mon)\n• SUI content — map the next few months (45 min, Mon)\n• 21 Envelopes — drafts due Thu 9/3; card + publish plan by Fri Shabbat; full publish plan by end of Sept (TOW conference)\n• Justice Tax — accept financing option + sign the documents (due 9/15)\n\nJH DEPARTMENT\n• Add Called to Create club in Warrior Flex → email Shari when complete (I manage this)\n• Ask Ben for JH goals\n• Check-ins with Ashley & Drea — parent emails, management techniques, communication/questioning strategies in lessons\n• Zoom/call with Drea this afternoon (Mon)\n• Update JH syllabus → send home tomorrow (Tue) for parents to read & sign\n• EE scope & sequence — review + upscale slides via Gamma\n• Order new build-out supplies (Mon)\n• Order small journals for JH BEI, SUI, AI via Anita (Mon)\n• JH Programs — check in with HS students teaching the courses; set a meeting on management + review their slides\n• Envision new JH classes — incl. an Apparel Business class (embroidery machines/sergers + partner seamstress businesses)\n• Help finish ACSI, submit it, email the point person\n\nMEETINGS TO SCHEDULE\n• Financing the Future team + Start-up Sprint team (two meetings)\n• HS Open House planning (45 min, Tue/Wed)\n• Weekly Café check-in with Janet — strong start + stock barriers\n• Justin — website handover (Anya's Claude build); email Anaya for a Zoom\n\nREVENUE / AI\n• Email Ben — AI Foundations 30-min vibe-code build (idea + layout) so they build their own scheduling/tracking app (buy-in)\n• AI inbox agent — Claude to help design: summaries, prioritizing, drafting replies\n• Social media relaunch — catch-up video on past trips + what I'm doing, to launch revenue streams\n\nFAMILY / FAITH\n• FaceTime prayer with Madi & Mirum EVERY night\n• Madi — every-other-Friday friends over for worship + Bible study (start 9/11): gas for fire, bench covers, cleanup, pumpkins, food\n• Send Mirium's medicine by Friday\n• Send Mirium's address to family for fall care packages\n• Mom — card + gift by Wednesday (birthday 9/9)\n• Graciela — card + 21 Envelopes drafts by Friday Shabbat (birthday 9/4)\n\nHOME / LATER\n• Handyman quote — door handle, toilet valve, fence, windows, fireplace, tan bark + back fence door, water filter\n• Give Holly a bath\n• Chiapas trip water bottles (Les design) + gifts for Jaime & team — Spring 2027 (park it)",
+ jh:[
+  {t:"Add “Called to Create” club in Warrior Flex → email Shari when live",c:1,s:"plan"},
+  {t:"Ask Ben for JH goals",c:1,s:"plan"},
+  {t:"Check-ins with Ashley & Drea — parent emails, management, questioning strategies in lessons",c:1,s:"plan"},
+  {t:"JH Programs — check in with HS students teaching courses; set mgmt + slides meeting",c:1,s:"plan"},
+  {t:"Fix Biblical Integration tool + gather JH & SI HS example lessons → send Shawn",c:2,s:"wip"},
+  {t:"Update JH syllabus → send home for parent signatures",c:2,s:"plan"},
+  {t:"Order journals for JH BEI, SUI, AI via Anita",c:2,s:"plan"},
+  {t:"Zoom/call with Drea — management + questioning strategies",c:3,s:"plan"},
+  {t:"EE scope & sequence — review + upscale slides via Gamma",c:4,s:"wip"},
+  {t:"Envision new JH classes incl. an Apparel Business class (embroidery/sergers + seamstress partners)",c:4,s:"plan"}]
+};
+function installWeekSep(){if(!DB.meta)DB.meta={};if(DB.meta.plan_sep_v2)return;
+ jhEnsure();var mon=PLAN_SEP.mon;
+ function eq(a,b){return JSON.stringify(a||[])===JSON.stringify(b||[]);}
+ // Weekly Big 3 — replace if blank, the old auto-seed, or the unedited v1 install.
+ var cw=DB.weeks[mon];
+ if(isBlankArr(cw)||(cw&&cw[0]&&cw[0].indexOf("Systemize what you built")>=0)||eq(cw,PLAN_V1.weekly))DB.weeks[mon]=PLAN_SEP.weekly.slice();
+ // Daily Big 3 + signal + events — replace unedited plans, else preserve your entries and append.
+ Object.keys(PLAN_SEP.days).forEach(function(iso){var p=PLAN_SEP.days[iso],rec=dayRec(iso);
+   var stale=(typeof SEED_DAYS!=="undefined"&&SEED_DAYS[iso]&&SEED_DAYS[iso].big3&&eq(rec.big3text,SEED_DAYS[iso].big3));
+   var wasV1=(PLAN_V1.big3[iso]&&eq(rec.big3text,PLAN_V1.big3[iso]));
+   if(isBlankArr(rec.big3text)||stale||wasV1){rec.big3text=p.big3.slice();rec.signal=p.signal;}
+   else{if(p.signal&&!(rec.signal&&rec.signal.trim()))rec.signal=p.signal;
+     var have=rec.big3text.filter(function(x){return x&&x.trim();});
+     p.big3.forEach(function(b){if(have.indexOf(b)<0&&have.length<3)have.push(b);});
+     while(have.length<3)have.push("");rec.big3text=have.slice(0,3);}
+   // Events: remove the old v1 tags, then add this week's (dedup).
+   if(!DB.userEvents[iso])DB.userEvents[iso]=[];
+   var v1e=(PLAN_V1.events[iso]||[]).map(function(x){return "✎ "+x;});
+   DB.userEvents[iso]=DB.userEvents[iso].filter(function(t){return v1e.indexOf(t)<0;});
+   (p.events||[]).forEach(function(ev){var tag="✎ "+ev;if(DB.userEvents[iso].indexOf(tag)<0)DB.userEvents[iso].push(tag);});
+ });
+ if(!DB.braindump[mon]||!DB.braindump[mon].trim())DB.braindump[mon]=PLAN_SEP.dump;
+ PLAN_SEP.jh.forEach(function(it){var key="plan|"+mon+"|"+it.t;
+   if(!DB.jhGoals.meta.pulled[key]){jhAdd(it.t,it.c,it.s,"auto");DB.jhGoals.meta.pulled[key]=1;}});
+ DB.meta.plan_sep_v2=1;saveSilent();
+ if(typeof renderAll==="function")renderAll();}
 
 /* ---------------- CLOUD SYNC ---------------- */
 var sb=null, sbUser=null, _pushT=null, _pulling=false, _booted=false;
@@ -1966,12 +2294,12 @@ function syncSetDot(state){var d=document.getElementById("syncDot");if(!d)return
 function syncStatusMsg(t){var s=document.getElementById("syStatus");if(s)s.textContent=t;}
 function syMsg(t,c){var m=document.getElementById("syMsg");if(m){m.textContent=t;m.style.color=c||"var(--muted)";}}
 function normalizeDB(){if(!DB||typeof DB!=="object")DB={};
- if(!DB.daily)DB.daily={};if(!DB.workouts)DB.workouts={};if(!DB.strength)DB.strength=[];if(!DB.weeks)DB.weeks={};if(!DB.braindump)DB.braindump={};if(!DB.seeded)DB.seeded={};if(!DB.inbox)DB.inbox=[];if(!DB.userEvents)DB.userEvents={};if(!DB.revenue)DB.revenue=[];if(!DB.customFoods)DB.customFoods=[];if(!DB.scripture)DB.scripture={};if(!DB.parking)DB.parking={};if(!DB.meta)DB.meta={};}
+ if(!DB.daily)DB.daily={};if(!DB.workouts)DB.workouts={};if(!DB.strength)DB.strength=[];if(!DB.weeks)DB.weeks={};if(!DB.braindump)DB.braindump={};if(!DB.seeded)DB.seeded={};if(!DB.inbox)DB.inbox=[];if(!DB.userEvents)DB.userEvents={};if(!DB.revenue)DB.revenue=[];if(!DB.customFoods)DB.customFoods=[];if(!DB.scripture)DB.scripture={};if(!DB.parking)DB.parking={};if(!DB.meta)DB.meta={};jhEnsure();wlEnsure();}
 function hideGate(){var g=document.getElementById("gate");if(g)g.style.display="none";}
 function showGate(){var g=document.getElementById("gate");if(g)g.style.display="flex";}
 function gErr(t){var e=document.getElementById("gErr");if(e)e.textContent=t||"";}
 function hasStoredSession(){try{var r=localStorage.getItem("kate_ff_auth");return !!(r&&r.length>20);}catch(e){return false;}}
-function blankDB(){return {daily:{},workouts:{},strength:[],weeks:{},braindump:{},seeded:{},inbox:[],userEvents:{},revenue:[],customFoods:[],scripture:{},parking:{},meta:{}};}
+function blankDB(){return {daily:{},workouts:{},strength:[],weeks:{},braindump:{},seeded:{},inbox:[],userEvents:{},revenue:[],customFoods:[],scripture:{},parking:{},jhGoals:{items:[],meta:{pulled:{}}},weeklog:{items:[]},meta:{}};}
 function initSync(){
  if(typeof window.supabase==="undefined"||!window.supabase.createClient){
    if(hasStoredSession()){hideGate();syncSetDot("offline");}else{showGate();gErr("Connect to the internet to sign in the first time.");}
@@ -2018,7 +2346,7 @@ function onSignedIn(u){
  if(!DB.meta)DB.meta={};DB.meta.uid=u.id;
  try{localStorage.setItem("a8_owner",IS_OWNER?"1":"0");}catch(e){}
  if(_pendingName){DB.meta.name=_pendingName;_pendingName="";}
- if(IS_OWNER)applySeeds();
+ if(IS_OWNER){applySeeds();applyOneTimePreloads();applyThuPreload();installWeekSep();}
  var o=document.getElementById("syncOut"),i=document.getElementById("syncIn"),who=document.getElementById("syWho");
  if(o)o.style.display="none";if(i)i.style.display="block";if(who)who.textContent=u.email||"you";
  syncSetDot("on");hideGate();renderAll();initMoments();}
@@ -2040,7 +2368,7 @@ function pullRemote(adopt){if(!sb||!sbUser||_pulling)return;_pulling=true;syncSe
    var remote=row.data;
    var rt=(remote&&remote.meta&&remote.meta.updatedAt)?remote.meta.updatedAt:new Date(row.updated_at).getTime();
    var lt=(DB&&DB.meta&&DB.meta.updatedAt)?DB.meta.updatedAt:0;
-   if(rt>=lt){DB=remote;normalizeDB();saveSilentLocal();renderAll();initMoments();syncSetDot("on");syncStatusMsg("Synced ✓ · pulled latest "+new Date().toLocaleTimeString());}
+   if(rt>=lt){DB=remote;normalizeDB();if(IS_OWNER){applyOneTimePreloads();applyThuPreload();installWeekSep();}saveSilentLocal();renderAll();initMoments();syncSetDot("on");syncStatusMsg("Synced ✓ · pulled latest "+new Date().toLocaleTimeString());}
    else{pushRemote();}
  },function(e){_pulling=false;syncSetDot("error");syncStatusMsg("Offline — using this device.");});}
 function doSignIn(){if(!sb){syMsg("Sync unavailable right now — check your connection.","var(--flag)");return;}
@@ -2070,7 +2398,7 @@ function doSignOut(){
 }
 
 /* ---------------- INIT ---------------- */
-load();normalizeDB();try{var _of=localStorage.getItem("a8_owner");IS_OWNER=(_of===null?true:_of==="1");}catch(e){}if(IS_OWNER)applySeeds();bindKpi();resolveToday();renderAll();initMoments();_booted=true;initSync();
+load();normalizeDB();try{var _of=localStorage.getItem("a8_owner");IS_OWNER=(_of===null?true:_of==="1");}catch(e){}if(IS_OWNER){applySeeds();applyOneTimePreloads();applyThuPreload();installWeekSep();}bindKpi();resolveToday();renderAll();initMoments();_booted=true;initSync();
 window.addEventListener("pagehide",flushSave);
 window.addEventListener("beforeunload",flushSave);
 window.addEventListener("blur",flushSave);
@@ -2081,7 +2409,7 @@ window.addEventListener("focus",function(){if(sb&&sbUser)pullRemote(true);});
  var sh=document.getElementById("gShow");if(sh)sh.onclick=gateShowPass;
  var gp=document.getElementById("gPass");if(gp)gp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();gateGo();}});
  var ge=document.getElementById("gEmail");if(ge)ge.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();document.getElementById("gPass").focus();}});})();
-document.getElementById("goalEditBtn").onclick=function(){var ed=document.getElementById("goalEdit");var open=ed.style.display!=="none";ed.style.display=open?"none":"block";if(!open){document.getElementById("goalTitleIn").value=(DB.meta&&DB.meta.goalTitle)||"";document.getElementById("goalTgtIn").value=(DB.meta&&DB.meta.goalTarget)||"";}};
+document.getElementById("goalEditBtn").onclick=function(){var ed=document.getElementById("goalEdit");var open=ed.style.display!=="none";ed.style.display=open?"none":"block";if(!open){document.getElementById("goalTitleIn").value=(DB.meta&&DB.meta.goalTitle)||"";document.getElementById("goalTgtIn").value=(DB.meta&&DB.meta.goalTarget)||"";document.getElementById("goalMissionIn").value=(DB.meta&&DB.meta.mission)||"";document.getElementById("goalMilestoneIn").value=(DB.meta&&DB.meta.milestone)||"";}};
 document.getElementById("goalSave").onclick=saveGoalEdit;
 document.querySelectorAll('[data-info]').forEach(function(b){b.onclick=function(){var el=document.getElementById(b.getAttribute("data-info"));if(el)el.style.display=(el.style.display==="none"||!el.style.display)?"block":"none";};});
 document.getElementById("logoutBtn2").onclick=doSignOut;
@@ -2135,6 +2463,21 @@ document.getElementById("scripDone").onclick=scripDone;
   else if(b.hasAttribute("data-del-verse")){var id=b.getAttribute("data-del-verse");s.custom=(s.custom||[]).filter(function(v){return v.id!==id;});save();renderScrip();}
   else if(b.id==="nvAdd"){addCustomVerse();}});})();
 document.getElementById("winsBtn").onclick=function(){printScope("wins");};
+(function(){var wb=document.getElementById("wlBody");if(wb)wb.addEventListener("click",function(e){var b=e.target.closest("[data-wl]");if(!b)return;wlRestore(b.getAttribute("data-wl"));});})();
+(function(){var pb=document.getElementById("jhPullBtn");if(pb)pb.onclick=jhPullWeek;
+ var bb=document.getElementById("jhBriefBtn");if(bb)bb.onclick=jhBrief;
+ var ab=document.getElementById("jhAddBtn");if(ab)ab.onclick=function(){var t=document.getElementById("jhAddText").value;if(!t.trim())return;
+   var cs=document.getElementById("jhAddCat").value,stv=document.getElementById("jhAddStatus").value;
+   var cat=(cs==="auto")?jhCatFor(t):(+cs||0);jhAdd(t,cat,stv,"manual");save();
+   document.getElementById("jhAddText").value="";renderJH();toast();};
+ var body=document.getElementById("jhBody");if(body){
+   body.addEventListener("click",function(e){var b=e.target.closest("[data-act]");if(!b)return;var act=b.getAttribute("data-act");if(act==="move")return;
+     var row=b.closest(".jhrow");if(!row)return;var id=row.getAttribute("data-id");var g=jhEnsure();var it=g.items.filter(function(x){return x.id===id;})[0];if(!it)return;
+     if(act==="cycle"){it.status=jhStatCycle(it.status);save();renderJH();}
+     else if(act==="del"){g.items=g.items.filter(function(x){return x.id!==id;});save();renderJH();}});
+   body.addEventListener("change",function(e){var s=e.target.closest("select[data-act='move']");if(!s)return;var row=s.closest(".jhrow");if(!row)return;
+     var id=row.getAttribute("data-id");var g=jhEnsure();var it=g.items.filter(function(x){return x.id===id;})[0];if(!it)return;it.cat=+s.value||0;save();renderJH();});}
+})();
 document.getElementById("oneMarkBtn").onclick=function(){document.getElementById("oneMarkCoach").style.display="block";};
 document.getElementById("stuckBtn").onclick=function(){var s=document.getElementById("stallCheck");s.style.display=(s.style.display==="none"||!s.style.display)?"block":"none";};
 var _resetArmed=false,_resetT;
