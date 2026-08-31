@@ -2286,7 +2286,7 @@ function installWeekSep(){if(!DB.meta)DB.meta={};if(DB.meta.plan_sep_v2)return;
  if(typeof renderAll==="function")renderAll();}
 
 /* ---------------- CLOUD SYNC ---------------- */
-var sb=null, sbUser=null, _pushT=null, _pulling=false, _booted=false;
+var sb=null, sbUser=null, _pushT=null, _pulling=false, _booted=false, _dirty=false, _retryT=null;
 function metaTouch(){if(!_booted)return;if(!DB.meta)DB.meta={};DB.meta.updatedAt=Date.now();}
 function syncSetDot(state){var d=document.getElementById("syncDot");if(!d)return;
  var map={offline:["● offline","var(--muted)"],on:["● synced","var(--good)"],syncing:["● syncing…","var(--brass)"],error:["● sync issue","var(--flag)"]};
@@ -2353,13 +2353,14 @@ function onSignedIn(u){
 function onSignedOut(){sbUser=null;
  var o=document.getElementById("syncOut"),i=document.getElementById("syncIn");
  if(o)o.style.display="block";if(i)i.style.display="none";syncSetDot("offline");showGate();}
-function schedulePush(){if(!_booted||!sb||!sbUser)return;syncSetDot("syncing");clearTimeout(_pushT);_pushT=setTimeout(pushRemote,1500);}
+function schedulePush(){if(!_booted||!sb||!sbUser)return;_dirty=true;syncSetDot("syncing");clearTimeout(_pushT);_pushT=setTimeout(pushRemote,800);}
+function _pushRetry(){clearTimeout(_retryT);_retryT=setTimeout(function(){if(_dirty&&sb&&sbUser)pushRemote();},5000);}
 function pushRemote(){if(!sb||!sbUser)return;
  var payload={user_id:sbUser.id,data:DB,updated_at:new Date().toISOString()};
  sb.from("app_state").upsert(payload,{onConflict:"user_id"}).then(function(r){
-   if(r.error){syncSetDot("error");syncStatusMsg("Sync issue: "+r.error.message+(/app_state|relation|does not exist/i.test(r.error.message||"")?" — run the setup SQL (Step A) in Supabase.":""));}
-   else{syncSetDot("on");syncStatusMsg("Synced ✓ · "+new Date().toLocaleTimeString());}
- },function(e){syncSetDot("error");syncStatusMsg("Offline — changes saved on this device.");});}
+   if(r.error){_dirty=true;syncSetDot("error");syncStatusMsg("Sync issue: "+r.error.message+(/app_state|relation|permission|denied|policy|row-level|does not exist/i.test(r.error.message||"")?" — run the setup SQL (grant + policy) in Supabase, or sign out and back in.":" — will keep retrying."));_pushRetry();}
+   else{_dirty=false;syncSetDot("on");syncStatusMsg("Synced ✓ · "+new Date().toLocaleTimeString());}
+ },function(e){_dirty=true;syncSetDot("error");syncStatusMsg("Offline — changes saved on this device; will retry.");_pushRetry();});}
 function pullRemote(adopt){if(!sb||!sbUser||_pulling)return;_pulling=true;syncSetDot("syncing");
  sb.from("app_state").select("data,updated_at").eq("user_id",sbUser.id).maybeSingle().then(function(r){_pulling=false;
    if(r.error){syncSetDot("error");syncStatusMsg("Sync issue: "+(r.error.message||"couldn't reach cloud")+(/app_state|relation|does not exist/i.test(r.error.message||"")?" — run the setup SQL (Step A) in Supabase.":""));return;}
@@ -2368,7 +2369,7 @@ function pullRemote(adopt){if(!sb||!sbUser||_pulling)return;_pulling=true;syncSe
    var remote=row.data;
    var rt=(remote&&remote.meta&&remote.meta.updatedAt)?remote.meta.updatedAt:new Date(row.updated_at).getTime();
    var lt=(DB&&DB.meta&&DB.meta.updatedAt)?DB.meta.updatedAt:0;
-   if(rt>=lt){DB=remote;normalizeDB();if(IS_OWNER){applyOneTimePreloads();applyThuPreload();installWeekSep();}saveSilentLocal();renderAll();initMoments();syncSetDot("on");syncStatusMsg("Synced ✓ · pulled latest "+new Date().toLocaleTimeString());}
+   if(rt>=lt&&!_dirty){DB=remote;normalizeDB();if(IS_OWNER){applyOneTimePreloads();applyThuPreload();installWeekSep();}saveSilentLocal();renderAll();initMoments();syncSetDot("on");syncStatusMsg("Synced ✓ · pulled latest "+new Date().toLocaleTimeString());}
    else{pushRemote();}
  },function(e){_pulling=false;syncSetDot("error");syncStatusMsg("Offline — using this device.");});}
 function doSignIn(){if(!sb){syMsg("Sync unavailable right now — check your connection.","var(--flag)");return;}
@@ -2399,11 +2400,14 @@ function doSignOut(){
 
 /* ---------------- INIT ---------------- */
 load();normalizeDB();try{var _of=localStorage.getItem("a8_owner");IS_OWNER=(_of===null?true:_of==="1");}catch(e){}if(IS_OWNER){applySeeds();applyOneTimePreloads();applyThuPreload();installWeekSep();}bindKpi();resolveToday();renderAll();initMoments();_booted=true;initSync();
-window.addEventListener("pagehide",flushSave);
-window.addEventListener("beforeunload",flushSave);
+function _flushAndPush(){flushSave();if(sb&&sbUser){clearTimeout(_pushT);pushRemote();}}
+window.addEventListener("pagehide",_flushAndPush);
+window.addEventListener("beforeunload",_flushAndPush);
 window.addEventListener("blur",flushSave);
-document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){flushSave();if(sb&&sbUser){clearTimeout(_pushT);pushRemote();}}else{if(sb&&sbUser)pullRemote(true);}});
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){_flushAndPush();}else{if(sb&&sbUser)pullRemote(true);}});
 window.addEventListener("focus",function(){if(sb&&sbUser)pullRemote(true);});
+window.addEventListener("online",function(){if(_dirty&&sb&&sbUser)pushRemote();});
+setInterval(function(){if(_dirty&&sb&&sbUser&&navigator.onLine!==false)pushRemote();},20000);
 (function(){var g=document.getElementById("gGo");if(g)g.onclick=gateGo;
  var n=document.getElementById("gNew");if(n)n.onclick=gateToggleMode;
  var sh=document.getElementById("gShow");if(sh)sh.onclick=gateShowPass;
